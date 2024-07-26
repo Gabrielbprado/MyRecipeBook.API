@@ -33,4 +33,7 @@
     <data name="NAME_EMPTY" xml:space="preserve">
         <value>name cannot be empty</value>
     </data>
+    <data name="PASSWORD_MINIMUM_LENGTH" xml:space="preserve">
+        <value>the password must be at least 6 characters long</value>
+    </data>
 </root>

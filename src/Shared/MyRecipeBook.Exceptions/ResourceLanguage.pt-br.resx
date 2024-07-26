@@ -26,4 +26,7 @@
     <data name="EMAIL_INVALID" xml:space="preserve">
         <value>Email invalido</value>
     </data>
+    <data name="PASSWORD_MINIMUM_LENGTH" xml:space="preserve">
+        <value>a senha deve ter pelo menos 6 caracteres</value>
+    </data>
 </root>

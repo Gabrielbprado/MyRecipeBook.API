@@ -9,6 +9,8 @@ public class ResponseErrorMessage
     }
     public ResponseErrorMessage(string errorMessage)
     {
-        ErrorMessage = [errorMessage];
+        ErrorMessage = new List<string>();
+        ErrorMessage.Add(errorMessage);
+
     }
 }

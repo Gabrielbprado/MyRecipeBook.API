@@ -22,7 +22,7 @@ public class ExceptionFilter : IExceptionFilter
         if (context.Exception is ErrorOnValidatorException)
         {
             var exception = (ErrorOnValidatorException) context.Exception;
-            context.Result = new BadRequestObjectResult(new ResponseErrorMessage(exception.ErrorMessage.ToString()!));
+            context.Result = new BadRequestObjectResult(new ResponseErrorMessage(exception.ErrorMessage.ToList()!));
             context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
             
         }

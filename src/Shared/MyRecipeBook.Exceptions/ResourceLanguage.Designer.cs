@@ -28,14 +28,14 @@ namespace MyRecipeBook.Exceptions {
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        public  ResourceLanguage() {
+        public ResourceLanguage() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public  static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MyRecipeBook.Exceptions.ResourceLanguage", typeof(ResourceLanguage).Assembly);
@@ -50,7 +50,7 @@ namespace MyRecipeBook.Exceptions {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public  static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -62,7 +62,7 @@ namespace MyRecipeBook.Exceptions {
         /// <summary>
         ///   Looks up a localized string similar to the email cannot be empty.
         /// </summary>
-        public  static string EMAIL_EMPTY {
+        public static string EMAIL_EMPTY {
             get {
                 return ResourceManager.GetString("EMAIL_EMPTY", resourceCulture);
             }
@@ -71,7 +71,7 @@ namespace MyRecipeBook.Exceptions {
         /// <summary>
         ///   Looks up a localized string similar to invalid email.
         /// </summary>
-        public  static string EMAIL_INVALID {
+        public static string EMAIL_INVALID {
             get {
                 return ResourceManager.GetString("EMAIL_INVALID", resourceCulture);
             }
@@ -80,7 +80,7 @@ namespace MyRecipeBook.Exceptions {
         /// <summary>
         ///   Looks up a localized string similar to name cannot be empty.
         /// </summary>
-        public  static string NAME_EMPTY {
+        public static string NAME_EMPTY {
             get {
                 return ResourceManager.GetString("NAME_EMPTY", resourceCulture);
             }
@@ -89,16 +89,25 @@ namespace MyRecipeBook.Exceptions {
         /// <summary>
         ///   Looks up a localized string similar to password must not be empty.
         /// </summary>
-        public  static string PASSWORD_EMPTY {
+        public static string PASSWORD_EMPTY {
             get {
                 return ResourceManager.GetString("PASSWORD_EMPTY", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to the password must be at least 6 characters long.
+        /// </summary>
+        public static string PASSWORD_MINIMUM_LENGTH {
+            get {
+                return ResourceManager.GetString("PASSWORD_MINIMUM_LENGTH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to unknown error.
         /// </summary>
-        public  static string UNKNOW_ERROR {
+        public static string UNKNOW_ERROR {
             get {
                 return ResourceManager.GetString("UNKNOW_ERROR", resourceCulture);
             }

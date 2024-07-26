@@ -9,11 +9,11 @@ public class CultureMiddleware(RequestDelegate next)
     {
         var supportedCultures = CultureInfo.GetCultures(CultureTypes.AllCultures);
         var culture = context.Request.Headers.AcceptLanguage.FirstOrDefault();
-        if (string.IsNullOrEmpty(culture))
+        var cultureInfo = new CultureInfo("en-us");
+        if (!string.IsNullOrEmpty(culture) && supportedCultures.Any(x => x.Name == culture))
         {
-            culture = "en-US";
+            cultureInfo = new CultureInfo(culture);
         }
-        var cultureInfo = new CultureInfo(culture);
         CultureInfo.CurrentCulture = cultureInfo;
         CultureInfo.CurrentUICulture = cultureInfo;
          await _next(context);
