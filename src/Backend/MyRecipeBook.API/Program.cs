@@ -35,8 +35,13 @@ app.Run();
 
 void CreateDatabase()
 {
+    if(builder.Configuration.IsUnitTest())
+        return;
     var connectionString = builder.Configuration.GetConnectionString();
     Database.AddDatabase(connectionString);
     app.RunMigrations();
 }
+
+public partial class Program
+{}
 

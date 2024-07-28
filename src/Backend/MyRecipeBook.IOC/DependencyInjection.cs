@@ -12,18 +12,21 @@ using MyRecipeBook.Domain.Entities;
 using MyRecipeBook.Domain.Repositories;
 using MyRecipeBook.Infrastructure.Data;
 using MyRecipeBook.Infrastructure.Repositories;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration;
+
+
 
 namespace MyRecipeBook.IOC;
 
 public static class DependencyInjection
 {
-    public static void AddAllServices(this IServiceCollection service,IConfigurationManager configuration)
+    public static void AddAllServices(this IServiceCollection service, IConfiguration configuration)
     {
         AddRepositories(service);
         AddAutoMapper(service);
         AddEncrypt(service);
-        AddFluentMigration(service, configuration);
-        AddDataContext(service, configuration);
+        AddInfraestructure(service, configuration);
     }
 
     public static void RunMigrations(this IApplicationBuilder services)
@@ -35,19 +38,30 @@ public static class DependencyInjection
         runner.MigrateUp();
     }
 
-    private static void AddDataContext(IServiceCollection service,IConfigurationManager configuration)
+    private static void AddDataContext(IServiceCollection service, IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString();
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
         service.AddDbContext<MyRecipeBookContext>(opts =>
         {
             opts.UseSqlite(connectionString);
         });
     }
-    
-    private static void AddFluentMigration(IServiceCollection service, IConfigurationManager configuration)
+
+    private static void AddInfraestructure(IServiceCollection service,IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString();
-        
+        var isUnitTest = configuration.IsUnitTest();
+        if (isUnitTest)
+        {
+            return;
+        }
+        AddDataContext(service, configuration);
+        AddFluentMigration(service, configuration);
+    }
+
+    private static void AddFluentMigration(IServiceCollection service, IConfiguration configuration)
+    {
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
+
         service.AddFluentMigratorCore()
             .ConfigureRunner(rb => rb
                 .AddSQLite()
@@ -60,6 +74,7 @@ public static class DependencyInjection
         service.AddScoped<IUserWriteOnlyRepository, UserRepository>();
         service.AddScoped<IUserReadOnlyRepository, UserRepository>();
         service.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
+        service.AddScoped<IUnityOfWork, UnityOfWork>();
     }
 
     private static void AddEncrypt(IServiceCollection service)
@@ -75,9 +90,15 @@ public static class DependencyInjection
         }).CreateMapper();
         service.AddScoped(opts => autoMapper);
     }
-    
-    public static string GetConnectionString(this IConfigurationManager configuration)
+
+    public static string GetConnectionString(this IConfiguration configuration)
     {
         return configuration.GetConnectionString("DefaultConnection")!;
+    }
+
+    public static bool IsUnitTest(this IConfiguration configuration)
+    {
+        var value = configuration.GetValue<bool>("IsUnitTest");
+        return value;
     }
 }
