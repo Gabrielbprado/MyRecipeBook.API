@@ -4,16 +4,18 @@ using MyRecipeBook.Application.Services.Crypt;
 using MyRecipeBook.Communication.Requests.User;
 using MyRecipeBook.Communication.Responses.User;
 using MyRecipeBook.Domain.Repositories;
+using MyRecipeBook.Exceptions;
 using MyRecipeBook.Exceptions.BaseException;
 
 namespace MyRecipeBook.Application.UseCases.User.Register;
 
-public class RegisterUserUseCase(IMapper mapper,PasswordCrypt passwordCrypt,IUserWriteOnlyRepository userWriteOnlyRepository,IUserReadOnlyRepository userReadOnlyRepository) : IRegisterUserUseCase
+public class RegisterUserUseCase(IMapper mapper,PasswordCrypt passwordCrypt,IUserWriteOnlyRepository userWriteOnlyRepository,IUserReadOnlyRepository userReadOnlyRepository,IUnityOfWork unityOfWork) : IRegisterUserUseCase
 {
     private readonly IUserWriteOnlyRepository _userWriteOnlyRepository = userWriteOnlyRepository;
     private readonly IMapper _mapper = mapper;
     private readonly PasswordCrypt _passwordCrypt = passwordCrypt;
     private readonly IUserReadOnlyRepository _userReadOnlyRepository = userReadOnlyRepository;
+    private readonly IUnityOfWork _unityOfWork = unityOfWork;
     
     public async Task<ResponseRegisterUserJson> Execute(RequestRegisterUserJson request)
     {
@@ -22,6 +24,7 @@ public class RegisterUserUseCase(IMapper mapper,PasswordCrypt passwordCrypt,IUse
         var user = _mapper.Map<Domain.Entities.User>(request);
         user.Password = passwordHash;
         await _userWriteOnlyRepository.Add(user);
+        await _unityOfWork.Commit();
         return new ResponseRegisterUserJson
         {
             Name = request.Name
@@ -35,7 +38,7 @@ public class RegisterUserUseCase(IMapper mapper,PasswordCrypt passwordCrypt,IUse
         var exists = await _userReadOnlyRepository.ExistsByEmail(request.Email);
         if (exists)
         {
-            result.Errors.Add(new ValidationFailure("email","Email already exists"));
+            result.Errors.Add(new ValidationFailure("email",ResourceLanguage.EMAIL_ALREADY_EXIST));
         }
         if (!result.IsValid)
         {

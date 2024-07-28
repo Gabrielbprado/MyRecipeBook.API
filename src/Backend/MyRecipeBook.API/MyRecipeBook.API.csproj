@@ -18,8 +18,4 @@
       <ProjectReference Include="..\MyRecipeBook.IOC\MyRecipeBook.IOC.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <None Remove="MyRecipeBook.db" />
-    </ItemGroup>
-
 </Project>

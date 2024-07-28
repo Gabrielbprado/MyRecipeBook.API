@@ -10,6 +10,6 @@ public abstract class BaseMigration : ForwardOnlyMigration
     {
         return Create.Table(tableName).WithColumn("Id").AsInt32().PrimaryKey().Identity()
             .WithColumn("CreatedAt").AsDate().NotNullable()
-            .WithColumn("IsActivated").AsBoolean().NotNullable();
+            .WithColumn("IsActive").AsBoolean().NotNullable();
     }
 }
