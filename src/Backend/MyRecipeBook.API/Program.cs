@@ -1,3 +1,8 @@
+using MyRecipeBook.API.Filters;
+using MyRecipeBook.API.Middleware;
+using MyRecipeBook.Infrastructure.Data;
+using MyRecipeBook.IOC;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,11 +10,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+builder.Services.AddMvc(opts =>
+{
+    opts.Filters.Add(new ExceptionFilter());
+});
+builder.Services.AddAllServices(builder.Configuration);
+builder.Services.AddFluentMigratorCore();
 var app = builder.Build();
 
+app.UseMiddleware<CultureMiddleware>();
 // Configure rotas para Controllers
 app.MapControllers();
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -18,7 +29,19 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+CreateDatabase();
 // Add help for Controllers
 app.Run();
+
+void CreateDatabase()
+{
+    if(builder.Configuration.IsUnitTest())
+        return;
+    var connectionString = builder.Configuration.GetConnectionString();
+    Database.AddDatabase(connectionString);
+    app.RunMigrations();
+}
+
+public partial class Program
+{}
 
