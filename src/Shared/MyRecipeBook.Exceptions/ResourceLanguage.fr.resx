@@ -29,4 +29,7 @@
     <data name="PASSWORD_MINIMUM_LENGTH" xml:space="preserve">
         <value>le mot de passe doit comporter au moins 6 caractères</value>
     </data>
+    <data name="EMAIL_ALREADY_EXIST" xml:space="preserve">
+        <value>l'email existe déjà</value>
+    </data>
 </root>

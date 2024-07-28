@@ -36,4 +36,7 @@
     <data name="PASSWORD_MINIMUM_LENGTH" xml:space="preserve">
         <value>the password must be at least 6 characters long</value>
     </data>
+    <data name="EMAIL_ALREADY_EXIST" xml:space="preserve">
+        <value>the email already exist</value>
+    </data>
 </root>

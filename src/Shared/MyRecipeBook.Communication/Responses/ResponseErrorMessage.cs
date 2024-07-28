@@ -2,15 +2,15 @@ namespace MyRecipeBook.Communication.Responses;
 
 public class ResponseErrorMessage
 {
-    public IList<string> ErrorMessage { get; set; } 
-    public ResponseErrorMessage(IList<string> errorMessage)
+    public IList<string> Errors { get; set; } 
+    public ResponseErrorMessage(IList<string> errors)
     {
-        ErrorMessage = errorMessage;
+        Errors = errors;
     }
     public ResponseErrorMessage(string errorMessage)
     {
-        ErrorMessage = new List<string>();
-        ErrorMessage.Add(errorMessage);
+        Errors = new List<string>();
+        Errors.Add(errorMessage);
 
     }
 }
