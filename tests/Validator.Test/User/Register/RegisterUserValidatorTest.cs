@@ -93,7 +93,6 @@ public class RegisterUserValidatorTest
         var validator = new RegisterUserValidator();
         var request = RequestRegisterUserJsonBuilder.Builder(passwordLength);
         //Act
-;
         var result = validator.Validate(request);
         //Assert
         result.Errors.Should().Contain(e => e.ErrorMessage == ResourceLanguage.PASSWORD_MINIMUM_LENGTH);

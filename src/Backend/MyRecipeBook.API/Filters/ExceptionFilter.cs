@@ -17,7 +17,7 @@ public class ExceptionFilter : IExceptionFilter
     }
 
 
-    private void HandleMyRecipeBookException(ExceptionContext context)
+    private static void HandleMyRecipeBookException(ExceptionContext context)
     {
         if (context.Exception is ErrorOnValidatorException)
         {
@@ -27,7 +27,7 @@ public class ExceptionFilter : IExceptionFilter
             
         }
     }
-    private void UnknowError(ExceptionContext context)
+    private static void UnknowError(ExceptionContext context)
     {
         context.Result = new ObjectResult(new ResponseErrorMessage(ResourceLanguage.UNKNOW_ERROR));
         context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
