@@ -9,5 +9,7 @@ public class UserRepository(MyRecipeBookContext context) : IUserWriteOnlyReposit
 {
     private readonly MyRecipeBookContext _context = context;
     public async Task Add(User user) => await _context.Users.AddAsync(user);
-    public async Task<bool> ExistsByEmail(string email) => await _context.Users.AnyAsync(x => x.Email == email);
+    public async Task<bool> ExistsByEmail(string email) => await _context.Users.AnyAsync(x => x.Email == email && x.IsActive);
+
+    public async Task<User?> GetByEmail(string email) =>await _context.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Email == email && x.IsActive);
 }

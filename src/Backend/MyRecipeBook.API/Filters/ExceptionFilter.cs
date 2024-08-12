@@ -19,13 +19,20 @@ public class ExceptionFilter : IExceptionFilter
 
     private static void HandleMyRecipeBookException(ExceptionContext context)
     {
-        if (context.Exception is ErrorOnValidatorException)
+        if (context.Exception is InvalidLoginException)
+        {
+            context.Result = new UnauthorizedObjectResult(new ResponseErrorMessage(context.Exception.Message));
+            context.HttpContext.Response.StatusCode = StatusCodes.Status401Unauthorized;
+            
+        }
+        else if (context.Exception is ErrorOnValidatorException)
         {
             var exception = (ErrorOnValidatorException) context.Exception;
             context.Result = new BadRequestObjectResult(new ResponseErrorMessage(exception.ErrorMessage.ToList()!));
             context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
             
         }
+        
     }
     private static void UnknowError(ExceptionContext context)
     {

@@ -14,11 +14,11 @@ using MyRecipeBook.Infrastructure.Data;
 using MyRecipeBook.Infrastructure.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration;
-
-
+using MyRecipeBook.Application.UseCases.Login;
+using MyRecipeBook.Application.UseCases.Login.DoLogin;
+using MyRecipeBook.Infrastructure.Security.Token.Access.Generate;
 
 namespace MyRecipeBook.IOC;
-
 public static class DependencyInjection
 {
     public static void AddAllServices(this IServiceCollection service, IConfiguration configuration)
@@ -27,6 +27,7 @@ public static class DependencyInjection
         AddAutoMapper(service);
         AddEncrypt(service);
         AddInfraestructure(service, configuration);
+        AddJwtToken(service, configuration);
     }
 
     public static void RunMigrations(this IApplicationBuilder services)
@@ -75,6 +76,15 @@ public static class DependencyInjection
         service.AddScoped<IUserReadOnlyRepository, UserRepository>();
         service.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
         service.AddScoped<IUnityOfWork, UnityOfWork>();
+        service.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
+    }
+
+    private static void AddJwtToken(IServiceCollection service,IConfiguration configuration)
+    {
+        var expirationTokenInMinutes = configuration.GetValue<uint>("Settings:JwtToken:ExpirationTokenInMinutes");
+        var signKey = configuration.GetValue<string>("Settings:JwtToken:SignKey");
+        service.AddScoped<IAccessTokenGenerator>(opts =>
+            new JwtAccessTokenGenerator(expirationTokenInMinutes, signKey!));
     }
 
     private static void AddEncrypt(IServiceCollection service)
@@ -90,6 +100,7 @@ public static class DependencyInjection
         }).CreateMapper();
         service.AddScoped(opts => autoMapper);
     }
+    
 
     public static string GetConnectionString(this IConfiguration configuration)
     {
@@ -101,4 +112,6 @@ public static class DependencyInjection
         var value = configuration.GetValue<bool>("IsUnitTest");
         return value;
     }
+    
+    
 }

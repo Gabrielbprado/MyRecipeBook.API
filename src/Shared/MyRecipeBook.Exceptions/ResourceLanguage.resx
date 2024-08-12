@@ -39,4 +39,7 @@
     <data name="EMAIL_ALREADY_EXIST" xml:space="preserve">
         <value>the email already exist</value>
     </data>
+    <data name="INVALID_LOGIN" xml:space="preserve">
+        <value>Email or password not found</value>
+    </data>
 </root>

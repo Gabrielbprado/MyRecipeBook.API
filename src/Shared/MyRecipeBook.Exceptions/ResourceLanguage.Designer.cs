@@ -23,9 +23,9 @@ namespace MyRecipeBook.Exceptions {
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class ResourceLanguage {
         
-        private static global::System.Resources.ResourceManager resourceMan;
+        public static global::System.Resources.ResourceManager resourceMan;
         
-        private static global::System.Globalization.CultureInfo resourceCulture;
+        public static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         public ResourceLanguage() {
@@ -83,6 +83,15 @@ namespace MyRecipeBook.Exceptions {
         public static string EMAIL_INVALID {
             get {
                 return ResourceManager.GetString("EMAIL_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email or password not found.
+        /// </summary>
+        public static string INVALID_LOGIN {
+            get {
+                return ResourceManager.GetString("INVALID_LOGIN", resourceCulture);
             }
         }
         
