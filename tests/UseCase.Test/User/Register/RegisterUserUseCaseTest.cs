@@ -2,6 +2,7 @@ using CommonTestUtilities;
 using CommonTestUtilities.Encrypt;
 using CommonTestUtilities.Mapper;
 using CommonTestUtilities.Repositories;
+using CommonTestUtilities.Tokens;
 using FluentAssertions;
 using MyRecipeBook.Application.UseCases.User.Register;
 using MyRecipeBook.Communication.Responses.User;
@@ -23,6 +24,8 @@ public class RegisterUserUseCaseTest
         // Assert
         result.Name.Should().Be(request.Name);
         result.Name.Should().NotBeNull();
+        result.Tokens.Should().NotBeNull();
+        result.Tokens.AccessToken.Should().NotBeNull();
     }
 
     [Fact]
@@ -55,10 +58,11 @@ public class RegisterUserUseCaseTest
         var workOfUnity = WorkOfUnityBuilder.Build();
         var userWriteOnlyRepository = UserWriteOnlyRepositoryBuilder.Builder();
         var userReadOnlyRepository = new UserReadOnlyRepositoryBuilder();
+        var token = AccessTokenGeneratorBuilder.Builder();
         if(!string.IsNullOrEmpty(email))
         {
            userReadOnlyRepository.ExistsByEmail(email);
         }
-        return new RegisterUserUseCase(mapper, passWordEncrypter,userWriteOnlyRepository,userReadOnlyRepository.Builder(),workOfUnity);
+        return new RegisterUserUseCase(mapper,token, passWordEncrypter,userWriteOnlyRepository,userReadOnlyRepository.Builder(),workOfUnity);
     }
 }

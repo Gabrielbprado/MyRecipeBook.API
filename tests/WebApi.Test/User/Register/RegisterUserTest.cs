@@ -10,15 +10,15 @@ using WebApi.Test.InlineData;
 
 namespace WebApi.Test.User.Register;
 
-public class RegisterUserTest(CustomWebApplicationFactory factory) : IClassFixture<CustomWebApplicationFactory>
+public class RegisterUserTest(CustomWebApplicationFactory factory) : MyRecipeBookClassFixture(factory)
 {
-    private readonly HttpClient _httpClient = factory.CreateClient();
+    private const string RequestUrl = "user";
 
     [Fact]
     public async Task Success()
     {
         var request = RequestRegisterUserJsonBuilder.Builder();
-        var result = await _httpClient.PostAsJsonAsync("User", request);
+        var result = await DoPost(RequestUrl, request);
         result.StatusCode.Should().Be(HttpStatusCode.Created);
         await using var responseBody = await result.Content.ReadAsStreamAsync();
         var response = await JsonDocument.ParseAsync(responseBody);
@@ -31,14 +31,12 @@ public class RegisterUserTest(CustomWebApplicationFactory factory) : IClassFixtu
     {
         var request = RequestRegisterUserJsonBuilder.Builder();
         request.Name = string.Empty;
-        _httpClient.DefaultRequestHeaders.AcceptLanguage.Clear();
-        _httpClient.DefaultRequestHeaders.Add("Accept-Language", cultureInfo);
-        var result = await _httpClient.PostAsJsonAsync("User", request);
+        var result = await DoPost(RequestUrl, request,cultureInfo);
         result.StatusCode.Should().Be(HttpStatusCode.BadRequest);
         await using var responseBody = await result.Content.ReadAsStreamAsync();
         var response = await JsonDocument.ParseAsync(responseBody);
         var error = response.RootElement.GetProperty("errors").EnumerateArray();
         var expectedMessage = ResourceLanguage.ResourceManager.GetString("NAME_EMPTY", new CultureInfo(cultureInfo)); 
-        error.Should().ContainSingle().And.Contain(e => e.GetString().Equals(expectedMessage));
+        error.Should().ContainSingle().And.Contain(e => e.GetString()!.Equals(expectedMessage));
     }
 }
