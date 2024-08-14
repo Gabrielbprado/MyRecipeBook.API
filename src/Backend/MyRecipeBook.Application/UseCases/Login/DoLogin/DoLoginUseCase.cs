@@ -3,6 +3,7 @@ using MyRecipeBook.Communication.Requests;
 using MyRecipeBook.Communication.Responses;
 using MyRecipeBook.Communication.Responses.User;
 using MyRecipeBook.Domain.Repositories;
+using MyRecipeBook.Domain.Security.Tokens;
 using MyRecipeBook.Exceptions.BaseException;
 
 namespace MyRecipeBook.Application.UseCases.Login.DoLogin;
@@ -20,8 +21,6 @@ public class DoLoginUseCase(IUserReadOnlyRepository readOnlyRepository, Password
         {
             throw new InvalidLoginException();
         }
-        user.UserIdentifier = Guid.NewGuid();
-
         return new ResponseRegisterUserJson
         {
             Name = user.Name,

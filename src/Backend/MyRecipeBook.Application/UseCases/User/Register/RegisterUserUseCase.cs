@@ -5,6 +5,7 @@ using MyRecipeBook.Communication.Requests.User;
 using MyRecipeBook.Communication.Responses;
 using MyRecipeBook.Communication.Responses.User;
 using MyRecipeBook.Domain.Repositories;
+using MyRecipeBook.Domain.Security.Tokens;
 using MyRecipeBook.Exceptions;
 using MyRecipeBook.Exceptions.BaseException;
 
