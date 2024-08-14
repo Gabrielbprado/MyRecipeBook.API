@@ -1,4 +1,4 @@
-namespace MyRecipeBook.Domain.Repositories;
+namespace MyRecipeBook.Domain.Security.Tokens;
 
 public interface IAccessTokenGenerator
 {
