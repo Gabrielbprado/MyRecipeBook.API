@@ -6,5 +6,5 @@ public interface IUserReadOnlyRepository
 {
     Task<bool> ExistsByEmail(string email);
     Task<User?> GetByEmail(string email);
-
+    Task<bool> ExistUserActiveWithId(Guid userIdentifier);
 }
