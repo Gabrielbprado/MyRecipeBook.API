@@ -35,4 +35,7 @@
     <data name="INVALID_LOGIN" xml:space="preserve">
         <value>E-mail ou senha não encontrados</value>
     </data>
+    <data name="NO_TOKEN" xml:space="preserve">
+        <value>o Token não existe</value>
+    </data>
 </root>

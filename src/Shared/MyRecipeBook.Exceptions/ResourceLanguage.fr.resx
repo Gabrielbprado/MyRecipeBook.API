@@ -35,4 +35,7 @@
     <data name="INVALID_LOGIN" xml:space="preserve">
         <value>Email ou mot de passe introuvable</value>
     </data>
+    <data name="NO_TOKEN" xml:space="preserve">
+        <value>le jeton n'existe pas</value>
+    </data>
 </root>

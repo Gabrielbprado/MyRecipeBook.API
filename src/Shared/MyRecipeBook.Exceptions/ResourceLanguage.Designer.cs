@@ -23,9 +23,9 @@ namespace MyRecipeBook.Exceptions {
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class ResourceLanguage {
         
-        public static global::System.Resources.ResourceManager resourceMan;
+        private static global::System.Resources.ResourceManager resourceMan;
         
-        public static global::System.Globalization.CultureInfo resourceCulture;
+        private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         public ResourceLanguage() {
@@ -101,6 +101,23 @@ namespace MyRecipeBook.Exceptions {
         public static string NAME_EMPTY {
             get {
                 return ResourceManager.GetString("NAME_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to the token does not exist.
+        /// </summary>
+        public static string NO_TOKEN {
+            get {
+                return ResourceManager.GetString("NO_TOKEN", resourceCulture);
+            }
+        } 
+        /// <summary>
+        ///   Looks up a localized string similar to the user has no permission 
+        /// </summary>
+        public static string USER_WITHOUT_PERMISSION {
+            get {
+                return ResourceManager.GetString("USER_WITHOUT_PERMISSION", resourceCulture);
             }
         }
         
