@@ -1,4 +1,5 @@
 using MyRecipeBook.Domain.Repositories;
+using MyRecipeBook.Domain.Security.Tokens;
 using MyRecipeBook.Infrastructure.Security.Token.Access.Generate;
 
 namespace CommonTestUtilities.Tokens;
