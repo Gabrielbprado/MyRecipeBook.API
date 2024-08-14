@@ -1,7 +1,11 @@
 using Microsoft.OpenApi.Models;
 using MyRecipeBook.API.Filters;
 using MyRecipeBook.API.Middleware;
+using MyRecipeBook.API.Token;
+using MyRecipeBook.Domain.Security.Tokens;
+using MyRecipeBook.Domain.Services.LoggedUser;
 using MyRecipeBook.Infrastructure.Data;
+using MyRecipeBook.Infrastructure.Services.LoggedUser;
 using MyRecipeBook.IOC;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+
 builder.Services.AddSwaggerGen(opts =>
 {
     
@@ -51,6 +57,8 @@ builder.Services.AddRouting(opts =>
 });
 builder.Services.AddAllServices(builder.Configuration);
 builder.Services.AddFluentMigratorCore();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ITokenProvider, HttpContextTokenValue>();
 var app = builder.Build();
 app.UseMiddleware<CultureMiddleware>();
 // Configure rotas para Controllers
