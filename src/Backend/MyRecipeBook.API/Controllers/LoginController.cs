@@ -4,7 +4,6 @@ using MyRecipeBook.Communication.Requests;
 using MyRecipeBook.Communication.Responses.User;
 
 namespace MyRecipeBook.API.Controllers;
-
 public class LoginController : MyRecipeBookControllerBase
 {
     [HttpPost]

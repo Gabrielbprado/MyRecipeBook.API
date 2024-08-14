@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using MyRecipeBook.API.Attributes;
+using MyRecipeBook.Application.UseCases.User.Profile;
 using MyRecipeBook.Application.UseCases.User.Register;
 using MyRecipeBook.Communication.Requests.User;
 using MyRecipeBook.Communication.Responses.User;
@@ -13,5 +15,13 @@ public class UserController : MyRecipeBookControllerBase
     {
         var result = await useCase.Execute(request);
         return Created(string.Empty, result);
+    } 
+    [HttpGet]
+    [ProducesResponseType(typeof(ResponseUserProfileJson), StatusCodes.Status200OK)]
+    [AuthenticatedUser]
+    public async Task<IActionResult> GetUserProfile([FromServices] IGetProfileUserUseCase useCase)
+    {
+        var result = await useCase.Execute();
+        return Ok(result);
     }
 }
