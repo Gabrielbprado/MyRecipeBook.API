@@ -17,18 +17,19 @@ public class DoLoginTest(CustomWebApplicationFactory factory) : MyRecipeBookClas
     [Fact]
     public async Task Success()
     {
-        var user = _factory.User;
-        var password = _factory.Password;
+        var email = _factory.GetEmail();
+        var password = _factory.GetPassword();
+        var name = factory.GetName();
         var request = new RequestLoginUseCase()
         {
-            Email = user.Email,
+            Email = email,
             Password = password
         };
         var result = await DoPost(Endpoint, request);
         result.StatusCode.Should().Be(HttpStatusCode.OK);
         await using var responseBody = await result.Content.ReadAsStreamAsync();
         var response = await JsonDocument.ParseAsync(responseBody);
-        response.RootElement.GetProperty("name").GetString().Should().NotBeNull().And.Be(user.Name);
+        response.RootElement.GetProperty("name").GetString().Should().NotBeNull().And.Be(name);
         response.RootElement.GetProperty("tokens").GetProperty("accessToken").Should().NotBeNull();
     }
     

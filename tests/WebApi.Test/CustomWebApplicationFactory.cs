@@ -10,8 +10,8 @@ namespace WebApi.Test;
 
 public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 {
-    public MyRecipeBook.Domain.Entities.User User { get; private set; } = default!;
-    public string Password { get; private set; } = string.Empty;
+    private  MyRecipeBook.Domain.Entities.User _user { get;  set; } = default!;
+    private string _password { get; set; } = string.Empty;
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Test")
@@ -43,9 +43,15 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     
     private void InitializeDbForTests(MyRecipeBookContext db)
     {
-        (User,Password) = UserBuilder.Builder();
-        db.Users.Add(User);
+        (_user,_password) = UserBuilder.Builder();
+        db.Users.Add(_user);
         db.SaveChanges();
     }
+
+    public string GetEmail() => _user.Email;
+    public string GetPassword() => _password;
+    public string GetName() => _user.Name;
+    public Guid GetUserIdentifier() => _user.UserIdentifier;
+  
 
 }
