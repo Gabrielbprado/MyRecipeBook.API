@@ -8,7 +8,7 @@ public abstract class BaseMigration : ForwardOnlyMigration
 {
     protected ICreateTableColumnOptionOrWithColumnSyntax CreateTable(string tableName)
     {
-        return Create.Table(tableName).WithColumn("Id").AsInt32().PrimaryKey().Identity()
+        return Create.Table(tableName).WithColumn("Id").AsInt64().PrimaryKey().Identity()
             .WithColumn("CreatedAt").AsDate().NotNullable()
             .WithColumn("IsActive").AsBoolean().NotNullable();
     }

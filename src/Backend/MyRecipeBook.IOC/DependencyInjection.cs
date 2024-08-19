@@ -11,6 +11,7 @@ using MyRecipeBook.Application.UseCases.Login;
 using MyRecipeBook.Application.UseCases.Login.DoLogin;
 using MyRecipeBook.Application.UseCases.User.Profile;
 using MyRecipeBook.Application.UseCases.User.Register;
+using MyRecipeBook.Application.UseCases.User.Update;
 using MyRecipeBook.Domain.Repositories;
 using MyRecipeBook.Domain.Security.Tokens;
 using MyRecipeBook.Domain.Services.LoggedUser;
@@ -81,6 +82,9 @@ namespace MyRecipeBook.IOC
             service.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
             service.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
             service.AddScoped<IGetProfileUserUseCase,GetProfileUserUseCase>();
+            service.AddScoped<IUserUpdateOnlyRepository, UserRepository>();
+            service.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
+            
         }
         private static void AddEncrypt(IServiceCollection service)
         {
