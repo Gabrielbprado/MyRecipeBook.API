@@ -45,6 +45,9 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     {
         (_user,_password) = UserBuilder.Builder();
         db.Users.Add(_user);
+        var (user2,_) = UserBuilder.Builder(2);
+        user2.Email = ExistEmail();
+        db.Users.Add(user2);
         db.SaveChanges();
     }
 
@@ -52,6 +55,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     public string GetPassword() => _password;
     public string GetName() => _user.Name;
     public Guid GetUserIdentifier() => _user.UserIdentifier;
-  
+    public string ExistEmail() => "ExistEmail@gmail.com";
+
 
 }
