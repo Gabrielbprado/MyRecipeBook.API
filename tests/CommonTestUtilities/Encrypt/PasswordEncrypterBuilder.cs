@@ -1,4 +1,4 @@
-using MyRecipeBook.Application.Services.Crypt;
+using MyRecipeBook.Infrastructure.Security.Cryptography;
 
 namespace CommonTestUtilities.Encrypt;
 
