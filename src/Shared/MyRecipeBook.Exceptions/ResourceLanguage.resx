@@ -45,4 +45,10 @@
     <data name="NO_TOKEN" xml:space="preserve">
         <value>the token does not exist</value>
     </data>
+    <data name="INCORRECT_PASSWORD" xml:space="preserve">
+        <value>The current password is incorrect</value>
+    </data>
+    <data name="USER_WITHOUT_PERMISSION" xml:space="preserve">
+        <value>Unauthorized user</value>
+    </data>
 </root>

@@ -38,4 +38,10 @@
     <data name="NO_TOKEN" xml:space="preserve">
         <value>le jeton n'existe pas</value>
     </data>
+    <data name="INCORRECT_PASSWORD" xml:space="preserve">
+        <value>Le mot de passe actuel est incorrect</value>
+    </data>
+    <data name="USER_WITHOUT_PERMISSION" xml:space="preserve">
+        <value>Utilisateur non autorisé</value>
+    </data>
 </root>

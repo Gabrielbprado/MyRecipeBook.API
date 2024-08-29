@@ -87,6 +87,15 @@ namespace MyRecipeBook.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The current password is incorrect.
+        /// </summary>
+        public static string INCORRECT_PASSWORD {
+            get {
+                return ResourceManager.GetString("INCORRECT_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email or password not found.
         /// </summary>
         public static string INVALID_LOGIN {
@@ -110,14 +119,6 @@ namespace MyRecipeBook.Exceptions {
         public static string NO_TOKEN {
             get {
                 return ResourceManager.GetString("NO_TOKEN", resourceCulture);
-            }
-        } 
-        /// <summary>
-        ///   Looks up a localized string similar to the user has no permission 
-        /// </summary>
-        public static string USER_WITHOUT_PERMISSION {
-            get {
-                return ResourceManager.GetString("USER_WITHOUT_PERMISSION", resourceCulture);
             }
         }
         
@@ -145,6 +146,15 @@ namespace MyRecipeBook.Exceptions {
         public static string UNKNOW_ERROR {
             get {
                 return ResourceManager.GetString("UNKNOW_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unauthorized user.
+        /// </summary>
+        public static string USER_WITHOUT_PERMISSION {
+            get {
+                return ResourceManager.GetString("USER_WITHOUT_PERMISSION", resourceCulture);
             }
         }
     }
