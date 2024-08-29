@@ -6,17 +6,18 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MyRecipeBook.Application.Services.AutoMapper;
-using MyRecipeBook.Application.Services.Crypt;
-using MyRecipeBook.Application.UseCases.Login;
 using MyRecipeBook.Application.UseCases.Login.DoLogin;
+using MyRecipeBook.Application.UseCases.User.ChangePassword;
 using MyRecipeBook.Application.UseCases.User.Profile;
 using MyRecipeBook.Application.UseCases.User.Register;
 using MyRecipeBook.Application.UseCases.User.Update;
 using MyRecipeBook.Domain.Repositories;
+using MyRecipeBook.Domain.Security.Cryptography;
 using MyRecipeBook.Domain.Security.Tokens;
 using MyRecipeBook.Domain.Services.LoggedUser;
 using MyRecipeBook.Infrastructure.Data;
 using MyRecipeBook.Infrastructure.Repositories;
+using MyRecipeBook.Infrastructure.Security.Cryptography;
 using MyRecipeBook.Infrastructure.Security.Token.Access.Generate;
 using MyRecipeBook.Infrastructure.Security.Token.Access.Validate;
 using MyRecipeBook.Infrastructure.Services.LoggedUser;
@@ -84,11 +85,12 @@ namespace MyRecipeBook.IOC
             service.AddScoped<IGetProfileUserUseCase,GetProfileUserUseCase>();
             service.AddScoped<IUserUpdateOnlyRepository, UserRepository>();
             service.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
-            
+            service.AddScoped<IChangePasswordUseCase, ChangePasswordUseCase>();
+
         }
         private static void AddEncrypt(IServiceCollection service)
         {
-            service.AddScoped<PasswordCrypt>();
+            service.AddScoped<IPasswordCrypt,PasswordCrypt>();
         }
 
         private static void AddAutoMapper(IServiceCollection service)

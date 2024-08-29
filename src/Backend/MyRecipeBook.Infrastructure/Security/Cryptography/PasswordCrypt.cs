@@ -1,6 +1,8 @@
-namespace MyRecipeBook.Application.Services.Crypt;
+using MyRecipeBook.Domain.Security.Cryptography;
 
-public class PasswordCrypt
+namespace MyRecipeBook.Infrastructure.Security.Cryptography;
+
+public class PasswordCrypt : IPasswordCrypt
 {
     public string Encrypt(string password)
     {

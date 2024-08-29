@@ -1,17 +1,17 @@
-using MyRecipeBook.Application.Services.Crypt;
 using MyRecipeBook.Communication.Requests;
 using MyRecipeBook.Communication.Responses;
 using MyRecipeBook.Communication.Responses.User;
 using MyRecipeBook.Domain.Repositories;
+using MyRecipeBook.Domain.Security.Cryptography;
 using MyRecipeBook.Domain.Security.Tokens;
 using MyRecipeBook.Exceptions.BaseException;
 
 namespace MyRecipeBook.Application.UseCases.Login.DoLogin;
 
-public class DoLoginUseCase(IUserReadOnlyRepository readOnlyRepository, PasswordCrypt encrypt,IAccessTokenGenerator accessTokenGenerator) : IDoLoginUseCase
+public class DoLoginUseCase(IUserReadOnlyRepository readOnlyRepository, IPasswordCrypt encrypt,IAccessTokenGenerator accessTokenGenerator) : IDoLoginUseCase
 {
     private readonly IUserReadOnlyRepository _readOnlyRepository = readOnlyRepository;
-    private readonly PasswordCrypt _encrypt = encrypt;
+    private readonly IPasswordCrypt _encrypt = encrypt;
     private readonly IAccessTokenGenerator _tokenGenerator = accessTokenGenerator;
     public async Task<ResponseRegisterUserJson> Execute(RequestLoginUseCase request)
     {
