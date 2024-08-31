@@ -7,6 +7,7 @@ using MyRecipeBook.Domain.Security.Cryptography;
 using MyRecipeBook.Domain.Services.LoggedUser;
 using MyRecipeBook.Exceptions;
 using MyRecipeBook.Exceptions.BaseException;
+using MyRecipeBook.Infrastructure.Security.Cryptography;
 
 namespace MyRecipeBook.Application.UseCases.User.ChangePassword;
 
@@ -22,7 +23,7 @@ public class ChangePasswordUseCase(ILoggedUser loggedUser,IPasswordCrypt passwor
         var logged = await _loggedUser.User();
         var user = await _repository.GetById(logged.Id);
         await Validate(request,logged);
-        user.Password = _passwordCrypt.Encrypt(request.NewPassword);
+        user.Password = passwordCrypt.Encrypt(request.NewPassword);
         _repository.Update(user);
         await _unityOfWork.Commit();
     }
