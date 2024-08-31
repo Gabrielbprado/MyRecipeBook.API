@@ -19,7 +19,7 @@ public class DoLoginUseCaseTest
     {
         var (user,password) = UserBuilder.Builder();
         var useCase = CreateUseCase(user);
-        var response = await useCase.Execute(new RequestLoginUseCase()
+        var response = await useCase.Execute(new RequestLoginJson()
         {
             Email = user.Email,
             Password = password
