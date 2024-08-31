@@ -13,7 +13,7 @@ public class DoLoginUseCase(IUserReadOnlyRepository readOnlyRepository, IPasswor
     private readonly IUserReadOnlyRepository _readOnlyRepository = readOnlyRepository;
     private readonly IPasswordCrypt _encrypt = encrypt;
     private readonly IAccessTokenGenerator _tokenGenerator = accessTokenGenerator;
-    public async Task<ResponseRegisterUserJson> Execute(RequestLoginUseCase request)
+    public async Task<ResponseRegisterUserJson> Execute(RequestLoginJson request)
     {
         var user = await _readOnlyRepository.GetByEmail(request.Email);
         var passwordIsValid = user != null && _encrypt.Verify(request.Password, user.Password);
