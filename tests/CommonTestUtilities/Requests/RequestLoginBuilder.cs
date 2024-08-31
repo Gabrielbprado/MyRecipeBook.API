@@ -5,9 +5,9 @@ namespace CommonTestUtilities.Requests;
 
 public static class RequestLoginBuilder
 {
-    public static RequestLoginUseCase Builder()
+    public static RequestLoginJson Builder()
     {
-        return new Faker<RequestLoginUseCase>()
+        return new Faker<RequestLoginJson>()
             .RuleFor(u => u.Email, f => f.Person.Email)
             .RuleFor(u => u.Password, f => f.Internet.Password(10));
 
