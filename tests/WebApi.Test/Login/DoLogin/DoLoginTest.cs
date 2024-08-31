@@ -20,7 +20,7 @@ public class DoLoginTest(CustomWebApplicationFactory factory) : MyRecipeBookClas
         var email = _factory.GetEmail();
         var password = _factory.GetPassword();
         var name = factory.GetName();
-        var request = new RequestLoginUseCase()
+        var request = new RequestLoginJson()
         {
             Email = email,
             Password = password
