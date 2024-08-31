@@ -39,4 +39,16 @@
     <data name="EMAIL_ALREADY_EXIST" xml:space="preserve">
         <value>the email already exist</value>
     </data>
+    <data name="INVALID_LOGIN" xml:space="preserve">
+        <value>Email or password not found</value>
+    </data>
+    <data name="NO_TOKEN" xml:space="preserve">
+        <value>the token does not exist</value>
+    </data>
+    <data name="INCORRECT_PASSWORD" xml:space="preserve">
+        <value>The current password is incorrect</value>
+    </data>
+    <data name="USER_WITHOUT_PERMISSION" xml:space="preserve">
+        <value>Unauthorized user</value>
+    </data>
 </root>

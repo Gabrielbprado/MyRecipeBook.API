@@ -10,6 +10,7 @@ public class CreateUserTable000001 : BaseMigration
         CreateTable("Users")
             .WithColumn("Name").AsString().NotNullable()
             .WithColumn("Email").AsString().NotNullable()
-            .WithColumn("Password").AsString().NotNullable();
+            .WithColumn("Password").AsString().NotNullable()
+            .WithColumn("UserIdentifier").AsGuid().NotNullable();
     }
 }

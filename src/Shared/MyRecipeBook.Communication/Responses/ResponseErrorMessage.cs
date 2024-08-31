@@ -7,6 +7,8 @@ public class ResponseErrorMessage
     {
         Errors = errors;
     }
+
+    public bool TokenIsExpired { get; set; }
     public ResponseErrorMessage(string errorMessage)
     {
         Errors = new List<string>();
