@@ -44,4 +44,43 @@
     <data name="USER_WITHOUT_PERMISSION" xml:space="preserve">
         <value>Utilisateur non autorisé</value>
     </data>
+    <data name="RECIPE_TITLE_EMPTY" xml:space="preserve">
+        <value>Le titre ne peut être vide</value>
+    </data>
+    <data name="RECIPE_COOKING_TIME_INVALID" xml:space="preserve">
+        <value>Temps de cuisson non valide</value>
+    </data>
+    <data name="RECIPE_DIFFICULTY_INVALID" xml:space="preserve">
+        <value>Difficulté non valide</value>
+    </data>
+    <data name="AT_LEAST_ONE_INGREDIENT" xml:space="preserve">
+        <value>La recette doit contenir au moins 1 ingrédient</value>
+    </data>
+    <data name="AT_LEAST_ONE_INSCTRUCTION" xml:space="preserve">
+        <value>La recette doit contenir au moins une instruction</value>
+    </data>
+    <data name="DISH_TYPE_INVALID" xml:space="preserve">
+        <value>Type de plat non valide</value>
+    </data>
+    <data name="INSTRUCTION_STEP_EMPTY" xml:space="preserve">
+        <value>L'étape d'instruction ne peut pas être vide</value>
+    </data>
+    <data name="INSTRUCTION_TEXT_EMPTY" xml:space="preserve">
+        <value>Le texte de l'instruction ne doit pas être vide</value>
+    </data>
+    <data name="INGREDIENT_NAME_EMPTY" xml:space="preserve">
+        <value>Le nom de l'ingrédient ne peut pas être vide</value>
+    </data>
+    <data name="INGREDIENT_QUANTITY_EMPTY" xml:space="preserve">
+        <value>La quantité d'ingrédients ne doit pas être vide</value>
+    </data>
+    <data name="INSTRUCTION_STEP_DUPLICATE" xml:space="preserve">
+        <value>Os Passos da intrução não podem se repetir</value>
+    </data>
+    <data name="INSTRUCTION_TEXT_MAX_LENGTH" xml:space="preserve">
+        <value>Le texte ne doit pas dépasser 2000 caractères</value>
+    </data>
+    <data name="STEP_MUST_BE_GREATER_THAN_ZERO" xml:space="preserve">
+        <value>Le numéro d'étape doit être supérieur à 0</value>
+    </data>
 </root>
