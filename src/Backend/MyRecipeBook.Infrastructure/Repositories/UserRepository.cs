@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MyRecipeBook.Domain.Entities;
 using MyRecipeBook.Domain.Repositories;
+using MyRecipeBook.Domain.Repositories.User;
 using MyRecipeBook.Infrastructure.Data;
 
 namespace MyRecipeBook.Infrastructure.Repositories;

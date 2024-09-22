@@ -12,8 +12,7 @@ public class ExceptionFilter : IExceptionFilter
     {
         if (context.Exception is MyRecipeBookException)
             HandleMyRecipeBookException(context);
-        else
-            UnknowError(context);
+       
     }
 
 

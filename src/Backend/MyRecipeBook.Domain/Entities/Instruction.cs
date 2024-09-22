@@ -1,6 +1,9 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace MyRecipeBook.Domain.Entities;
 
-public abstract class Instructions : BaseEntity
+[Table("Instructions")]
+public  class Instruction : BaseEntity
 {
     public int Step { get; set; }
     public string Text { get; set; } = string.Empty;

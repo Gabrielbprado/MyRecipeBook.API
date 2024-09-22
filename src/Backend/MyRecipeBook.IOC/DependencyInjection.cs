@@ -7,11 +7,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MyRecipeBook.Application.Services.AutoMapper;
 using MyRecipeBook.Application.UseCases.Login.DoLogin;
+using MyRecipeBook.Application.UseCases.Recipe;
 using MyRecipeBook.Application.UseCases.User.ChangePassword;
 using MyRecipeBook.Application.UseCases.User.Profile;
 using MyRecipeBook.Application.UseCases.User.Register;
 using MyRecipeBook.Application.UseCases.User.Update;
 using MyRecipeBook.Domain.Repositories;
+using MyRecipeBook.Domain.Repositories.Recipe;
+using MyRecipeBook.Domain.Repositories.User;
 using MyRecipeBook.Domain.Security.Cryptography;
 using MyRecipeBook.Domain.Security.Tokens;
 using MyRecipeBook.Domain.Services.LoggedUser;
@@ -86,6 +89,8 @@ namespace MyRecipeBook.IOC
             service.AddScoped<IUserUpdateOnlyRepository, UserRepository>();
             service.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
             service.AddScoped<IChangePasswordUseCase, ChangePasswordUseCase>();
+            service.AddScoped<IRecipeWriteOnlyRepository,RecipeRepository>();
+            service.AddScoped<IRegisterRecipeUseCase, RegisterRecipeUseCase>();
 
         }
         private static void AddEncrypt(IServiceCollection service)
