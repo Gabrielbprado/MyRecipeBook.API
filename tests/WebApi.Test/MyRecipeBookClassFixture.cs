@@ -8,9 +8,10 @@ public class MyRecipeBookClassFixture(CustomWebApplicationFactory factory) : ICl
 {
     private readonly HttpClient _httpClient = factory.CreateClient();
 
-    protected async Task<HttpResponseMessage> DoPost(string requestUrl, object request, string culture = "en")
+    protected async Task<HttpResponseMessage> DoPost(string requestUrl, object request, string culture = "en",string token = "")
     {
         ChangeCulture(culture);
+        Authorization(token);
         return await _httpClient.PostAsJsonAsync(requestUrl, request);
     }
 

@@ -6,7 +6,7 @@ namespace CommonTestUtilities.Repositories;
 
 public class LoggedUserBuilder
 {
-    public ILoggedUser Build(User user)
+    public ILoggedUser Build(MyRecipeBook.Domain.Entities.User user)
     {
         var loggedUser = new Mock<ILoggedUser>();
         loggedUser.Setup(x => x.User()).ReturnsAsync(user);

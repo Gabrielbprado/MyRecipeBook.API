@@ -1,9 +1,7 @@
 using Moq;
-using MyRecipeBook.Domain.Entities;
-using MyRecipeBook.Domain.Repositories;
 using MyRecipeBook.Domain.Repositories.User;
 
-namespace CommonTestUtilities.Repositories;
+namespace CommonTestUtilities.Repositories.User;
 
 public class UserReadOnlyRepositoryBuilder
 {
@@ -19,7 +17,7 @@ public class UserReadOnlyRepositoryBuilder
         return _mock.Object;
     }
     
-    public void GetByEmail(User user)
+    public void GetByEmail(MyRecipeBook.Domain.Entities.User user)
     {
         _mock.Setup(x => x.GetByEmail(user.Email)).ReturnsAsync(user);
     }

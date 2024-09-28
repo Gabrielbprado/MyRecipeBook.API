@@ -141,4 +141,17 @@ public class RecipeValidatorTest
         result.IsValid.Should().BeFalse();
         result.Errors.Should().Contain(e => e.ErrorMessage == ResourceLanguage.STEP_MUST_BE_GREATER_THAN_ZERO);
     }
+    
+    [Fact]
+    public async Task Instruction_Too_Long()
+    {
+        var request = RequestRecipeJsonBuilder.Build();
+      
+        var validator = new RecipeValidator();
+        request.Instructions.First().Text = new string('a', 2001);
+        var result = await validator.ValidateAsync(request);
+
+        result.IsValid.Should().BeFalse();
+        result.Errors.Should().Contain(e => e.ErrorMessage == ResourceLanguage.INSTRUCTION_TEXT_MAX_LENGTH);
+    }
 }
