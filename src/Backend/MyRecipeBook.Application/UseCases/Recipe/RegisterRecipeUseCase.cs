@@ -27,11 +27,7 @@ public class RegisterRecipeUseCase(IRecipeWriteOnlyRepository recipeWriteOnlyRep
         recipe.Instructions = _mapper.Map<IList<Domain.Entities.Instruction>>(instructions);
         await _recipeWriteOnlyRepository.Add(recipe);
         await _unityOfWork.Commit();
-        return new ResponseRegisteredRecipeJson
-        {
-            Id = recipe.Id.ToString(),
-            Title = recipe.Title
-        };
+        return _mapper.Map<ResponseRegisteredRecipeJson>(recipe);
     }
 
     private async Task Validate(RequestRecipeJson request)

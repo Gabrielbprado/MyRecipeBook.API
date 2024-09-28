@@ -24,6 +24,7 @@ using MyRecipeBook.Infrastructure.Security.Cryptography;
 using MyRecipeBook.Infrastructure.Security.Token.Access.Generate;
 using MyRecipeBook.Infrastructure.Security.Token.Access.Validate;
 using MyRecipeBook.Infrastructure.Services.LoggedUser;
+using Sqids;
 
 namespace MyRecipeBook.IOC
 {
@@ -32,7 +33,7 @@ namespace MyRecipeBook.IOC
         public static void AddAllServices(this IServiceCollection service, IConfiguration configuration)
         {
             AddRepositories(service);
-            AddAutoMapper(service);
+            AddAutoMapper(service,configuration);
             AddEncrypt(service);
             AddInfrastructure(service, configuration);
             AddTokens(service, configuration);
@@ -98,11 +99,17 @@ namespace MyRecipeBook.IOC
             service.AddScoped<IPasswordCrypt,PasswordCrypt>();
         }
 
-        private static void AddAutoMapper(IServiceCollection service)
+        private static void AddAutoMapper(IServiceCollection service,IConfiguration configuration)
         {
+            var alphabet = configuration.GetValue<string>("Settings:IdCryptographyAlphabet")!;
+            var sqids = new SqidsEncoder<long>(new()
+            {
+                MinLength = 3,
+                Alphabet = alphabet
+            });
             var autoMapper = new MapperConfiguration(cfg =>
             {
-                cfg.AddProfile(new AutoMapperProfile());
+                cfg.AddProfile(new AutoMapperProfile(sqids));
             }).CreateMapper();
             service.AddScoped(opts => autoMapper);
         }
