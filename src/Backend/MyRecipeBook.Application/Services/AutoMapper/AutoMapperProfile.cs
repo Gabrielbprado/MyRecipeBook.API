@@ -5,40 +5,51 @@ using MyRecipeBook.Communication.Responses.User;
 using MyRecipeBook.Domain.Entities;
 using MyRecipeBook.Communication.Enums;
 using MyRecipeBook.Communication.Responses.Recipe;
+using MyRecipeBook.Domain.Dtos;
 using Sqids;
 using DishTypes = MyRecipeBook.Communication.Enums.DishTypes;
 
-
-namespace MyRecipeBook.Application.Services.AutoMapper;
-
-public class AutoMapperProfile : Profile
+namespace MyRecipeBook.Application.Services.AutoMapper
 {
-    private readonly SqidsEncoder<long> _idEncoder;
-    public AutoMapperProfile(SqidsEncoder<long> idEncoder)
+    public class AutoMapperProfile : Profile
     {
-        _idEncoder = idEncoder;
-        RequestToDomain();
-        DomainToResponse();
-    }
+        private readonly SqidsEncoder<long> _idEncoder;
 
-    private void RequestToDomain()
-    {
-        CreateMap<RequestRegisterUserJson,User>();
-        CreateMap<RequestRecipeJson, Recipe>()
-            .ForMember(r => r.Ingredients, opts => opts.Ignore())
-            .ForMember(r => r.Instructions, opts => opts.Ignore())
-            .ForMember(dest => dest.DishTypes, opt => opt.MapFrom(source => source.DishTypes.Distinct()));
-        CreateMap<RequestIngredientJson, Ingredient>();
-        CreateMap<RequestInstructionJson, Instruction>();
-    }
+        public AutoMapperProfile(SqidsEncoder<long> idEncoder)
+        {
+            _idEncoder = idEncoder;
+            RequestToDomain();
+            DomainToResponse();
+        }
 
-    private void DomainToResponse()
-    {
-        CreateMap<User, ResponseUserProfileJson>();
-        CreateMap<Recipe,ResponseRegisteredRecipeJson>()
-            .ForMember(r => r.Id, opts => opts.MapFrom(source => _idEncoder.Encode(source.Id)));
+        private void RequestToDomain()
+        {
+            CreateMap<RequestRegisterUserJson, User>();
+            CreateMap<RequestRecipeJson, Recipe>()
+                .ForMember(r => r.Ingredients, opts => opts.Ignore())
+                .ForMember(r => r.Instructions, opts => opts.Ignore())
+                .ForMember(dest => dest.DishTypes, opt => opt.MapFrom(source => source.DishTypes.Distinct()));
 
-        CreateMap<DishTypes , Domain.Entities.DishTypes>()
-            .ForMember(dest => dest.Type, opt => opt.MapFrom(source => source));
+            CreateMap<RequestIngredientJson, Ingredient>();
+            CreateMap<RequestInstructionJson, Instruction>();
+        }
+
+        private void DomainToResponse()
+        {
+            CreateMap<User, ResponseUserProfileJson>();
+
+            CreateMap<Recipe, ResponseRegisteredRecipeJson>()
+                .ForMember(r => r.Id, opts => opts.MapFrom(source => _idEncoder.Encode(source.Id)));
+
+            CreateMap<DishTypes, Domain.Entities.DishTypes>()
+                .ForMember(dest => dest.Type, opt => opt.MapFrom(source => source));
+
+            CreateMap<Recipe, ResponseShortRecipeJson>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(source => _idEncoder.Encode(source.Id)))
+                .ForMember(dest => dest.AmountIngredients, opt => opt.MapFrom(source => source.Ingredients.Count));
+
+
+            CreateMap<RequestFilterRecipeJson, FilterRecipesDto>();
+        }
     }
 }
