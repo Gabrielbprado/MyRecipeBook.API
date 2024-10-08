@@ -3,6 +3,7 @@ using CommonTestUtilities.Mapper;
 using CommonTestUtilities.Repositories;
 using CommonTestUtilities.Repositories.Recipe;
 using CommonTestUtilities.Requests;
+using CommonTestUtilities.Requests.Recipe;
 using FluentAssertions;
 using MyRecipeBook.Application.UseCases.Recipe;
 

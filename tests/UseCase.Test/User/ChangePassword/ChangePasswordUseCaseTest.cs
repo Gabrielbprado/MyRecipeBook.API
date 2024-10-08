@@ -4,6 +4,7 @@ using CommonTestUtilities.Entities;
 using CommonTestUtilities.Repositories;
 using CommonTestUtilities.Repositories.User;
 using CommonTestUtilities.Requests;
+using CommonTestUtilities.Requests.User;
 using FluentAssertions;
 using MyRecipeBook.Application.UseCases.User.ChangePassword;
 using MyRecipeBook.Communication.Requests.ChangePassword;
