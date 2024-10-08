@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
 using CommonTestUtilities;
+using CommonTestUtilities.Requests.User;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
 using MyRecipeBook.Exceptions;

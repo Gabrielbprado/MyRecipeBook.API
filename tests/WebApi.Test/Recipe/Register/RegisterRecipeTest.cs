@@ -1,6 +1,7 @@
 using System.Net;
 using System.Text.Json;
 using CommonTestUtilities.Requests;
+using CommonTestUtilities.Requests.Recipe;
 using CommonTestUtilities.Tokens;
 using FluentAssertions;
 

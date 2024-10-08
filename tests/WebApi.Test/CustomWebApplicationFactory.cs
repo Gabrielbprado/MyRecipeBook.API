@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestPlatform.TestHost;
+using MyRecipeBook.Communication.Enums;
 using MyRecipeBook.Infrastructure.Data;
 
 namespace WebApi.Test;
@@ -11,6 +12,7 @@ namespace WebApi.Test;
 public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 {
     private  MyRecipeBook.Domain.Entities.User _user { get;  set; } = default!;
+    private MyRecipeBook.Domain.Entities.Recipe _recipe { get; set; } = default!;
     private string _password { get; set; } = string.Empty;
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
@@ -36,12 +38,13 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
                 var scopedServices = scope.ServiceProvider;
                 var db = scopedServices.GetRequiredService<MyRecipeBookContext>();
                 db.Database.EnsureCreated();
-                InitializeDbForTests(db);
+                InitializeUserDbForTests(db);
+                InitializeRecipesDbForTests(db);
                 
             });
     }
     
-    private void InitializeDbForTests(MyRecipeBookContext db)
+    private void InitializeUserDbForTests(MyRecipeBookContext db)
     {
         (_user,_password) = UserBuilder.Builder();
         db.Users.Add(_user);
@@ -50,6 +53,15 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
         db.Users.Add(user2);
         db.SaveChanges();
     }
+    
+    private void InitializeRecipesDbForTests(MyRecipeBookContext db)
+    {
+        _recipe = RecipeBuilder.Builder(_user);
+        db.Recipes.Add(_recipe);
+        db.SaveChanges();
+    }
+    
+    //User
 
     public string GetEmail() => _user.Email;
     public string GetPassword() => _password;
@@ -57,5 +69,13 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     public Guid GetUserIdentifier() => _user.UserIdentifier;
     public string ExistEmail() => "ExistEmail@gmail.com";
 
+    //Recipe
+    
+    public string GetRecipeId() => _recipe.Id.ToString();
+    public string GetRecipeTitle() => _recipe.Title;
+    public Difficulty GetRecipeDifficulty() => (Difficulty)_recipe.Difficulty;
+    public CookingTime GetRecipeCookingTime() => (CookingTime)_recipe.CookingTime;
+    public IList<DishTypes> GetDishTypes() => _recipe.DishTypes.Select(c => (DishTypes)c.Type).ToList();
+    
 
 }
