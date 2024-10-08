@@ -1,4 +1,5 @@
 using CommonTestUtilities;
+using CommonTestUtilities.Requests.User;
 using FluentAssertions;
 using MyRecipeBook.Application.UseCases.User.Register;
 using MyRecipeBook.Exceptions;

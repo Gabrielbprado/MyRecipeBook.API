@@ -1,7 +1,7 @@
 using Bogus;
 using MyRecipeBook.Communication.Requests.ChangePassword;
 
-namespace CommonTestUtilities.Requests;
+namespace CommonTestUtilities.Requests.User;
 
 public static class RequestChangePasswordJsonBuilder
 {

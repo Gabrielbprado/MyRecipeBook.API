@@ -1,4 +1,5 @@
 using CommonTestUtilities.Requests;
+using CommonTestUtilities.Requests.Recipe;
 using FluentAssertions;
 using MyRecipeBook.Application.UseCases.Recipe;
 using MyRecipeBook.Communication.Enums;
