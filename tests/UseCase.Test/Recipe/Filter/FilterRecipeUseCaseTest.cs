@@ -42,7 +42,7 @@ public class FilterRecipeUseCaseTest
     }
     
     
-    private static FilterRecipeUseCase CreateUseCase(MyRecipeBook.Domain.Entities.User user, IList<MyRecipeBook.Domain.Entities.Recipe> recipes)
+    private static FilterRecipeUseCase CreateUseCase(MyRecipeBook.Domain.Entities.User user, IList<MyRecipeBook.Domain.Entities.Recipe?> recipes)
     {
         var mapper = MapperBuilder.Build();
         var loggedUser = new LoggedUserBuilder().Build(user);
