@@ -9,9 +9,9 @@ namespace CommonTestUtilities.Entities;
 
 public class RecipeBuilder
 {
-    private IList<Recipe> recipes = new List<Recipe>();
+    private IList<Recipe?> recipes = new List<Recipe?>();
     
-    public IList<Recipe> Collection(User user, int count = 2)
+    public IList<Recipe?> Collection(User user, int count = 2)
     {
         if (count <= 0)
             count = 1;
@@ -26,7 +26,7 @@ public class RecipeBuilder
         return recipes;
     }
 
-    public static Recipe Builder(User user)
+    public static Recipe? Builder(User user)
     {
         return new Faker<Recipe>()
             .RuleFor(r => r.Id, () => 1)
