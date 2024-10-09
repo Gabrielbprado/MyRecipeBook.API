@@ -38,4 +38,14 @@ public class RecipeRepository(MyRecipeBookContext context) : IRecipeWriteOnlyRep
         var result = await query.Include(r => r.Ingredients).ToListAsync();
         return result;
     }
+
+    public Task<Recipe> GetById(User loggedUser, long recipeId)
+    {
+       return  _context.Recipes
+           .AsNoTracking()
+           .Include(r => r.Ingredients)
+           .Include(r => r.DishTypes)
+           .Include(r => r.Instructions)
+           .FirstAsync(r => r.Id == recipeId && r.UserId == loggedUser.Id);
+    }
 }

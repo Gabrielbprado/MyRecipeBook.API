@@ -32,6 +32,8 @@ namespace MyRecipeBook.Application.Services.AutoMapper
 
             CreateMap<RequestIngredientJson, Ingredient>();
             CreateMap<RequestInstructionJson, Instruction>();
+            CreateMap<RequestFilterRecipeJson, FilterRecipesDto>();
+
         }
 
         private void DomainToResponse()
@@ -49,7 +51,15 @@ namespace MyRecipeBook.Application.Services.AutoMapper
                 .ForMember(dest => dest.AmountIngredients, opt => opt.MapFrom(source => source.Ingredients.Count));
 
 
-            CreateMap<RequestFilterRecipeJson, FilterRecipesDto>();
+            CreateMap<Recipe,ResponseRecipeJson>()
+                .ForMember(des => des.Id, opt => opt.MapFrom(source => _idEncoder.Encode(source.Id)))
+                .ForMember(des => des.DishTypes, opt => opt.MapFrom(source => source.DishTypes.Select(r => r.Type)));
+            
+            CreateMap<Ingredient,ResponseIngredientJson>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(source => _idEncoder.Encode(source.Id)));
+            
+            CreateMap<Instruction,ResponseInstructionsJson>()
+                .ForMember(des => des.Id, opt => opt.MapFrom(source => _idEncoder.Encode(source.Id)));
         }
     }
 }

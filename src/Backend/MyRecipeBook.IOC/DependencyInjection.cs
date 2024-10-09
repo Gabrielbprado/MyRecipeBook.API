@@ -9,6 +9,7 @@ using MyRecipeBook.Application.Services.AutoMapper;
 using MyRecipeBook.Application.UseCases.Login.DoLogin;
 using MyRecipeBook.Application.UseCases.Recipe;
 using MyRecipeBook.Application.UseCases.Recipe.Filter;
+using MyRecipeBook.Application.UseCases.Recipe.GetById;
 using MyRecipeBook.Application.UseCases.User.ChangePassword;
 using MyRecipeBook.Application.UseCases.User.Profile;
 using MyRecipeBook.Application.UseCases.User.Register;
@@ -34,7 +35,8 @@ namespace MyRecipeBook.IOC
         public static void AddAllServices(this IServiceCollection service, IConfiguration configuration)
         {
             AddRepositories(service);
-            AddAutoMapper(service,configuration);
+            AddAutoMapper(service);
+            AddSqidsEncoder(service, configuration);
             AddEncrypt(service);
             AddInfrastructure(service, configuration);
             AddTokens(service, configuration);
@@ -95,6 +97,7 @@ namespace MyRecipeBook.IOC
             service.AddScoped<IRegisterRecipeUseCase, RegisterRecipeUseCase>();
             service.AddScoped<IFilterRecipeUseCase, FilterRecipeUseCase>();
             service.AddScoped<IRecipeReadOnlyRepository, RecipeRepository>();
+            service.AddScoped<IRecipeGetByIdUseCase, RecipeGetByIdUseCase>();
 
         }
         private static void AddEncrypt(IServiceCollection service)
@@ -102,7 +105,17 @@ namespace MyRecipeBook.IOC
             service.AddScoped<IPasswordCrypt,PasswordCrypt>();
         }
 
-        private static void AddAutoMapper(IServiceCollection service,IConfiguration configuration)
+        private static void AddAutoMapper(IServiceCollection service)
+        {
+            service.AddScoped(option => new AutoMapper.MapperConfiguration(autoMapperOptions =>
+            {
+                var sqids = option.GetService<SqidsEncoder<long>>()!;
+
+                autoMapperOptions.AddProfile(new AutoMapperProfile(sqids));
+            }).CreateMapper());
+        }
+        
+        private static void AddSqidsEncoder(IServiceCollection service, IConfiguration configuration)
         {
             var alphabet = configuration.GetValue<string>("Settings:IdCryptographyAlphabet")!;
             var sqids = new SqidsEncoder<long>(new()
@@ -110,11 +123,7 @@ namespace MyRecipeBook.IOC
                 MinLength = 3,
                 Alphabet = alphabet
             });
-            var autoMapper = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile(new AutoMapperProfile(sqids));
-            }).CreateMapper();
-            service.AddScoped(opts => autoMapper);
+            service.AddSingleton(sqids);
         }
 
         private static void AddTokens(IServiceCollection service, IConfiguration configuration)
