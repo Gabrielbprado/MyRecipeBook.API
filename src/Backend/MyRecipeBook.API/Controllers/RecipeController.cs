@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using MyRecipeBook.API.Attributes;
+using MyRecipeBook.API.Binders;
 using MyRecipeBook.Application.UseCases.Recipe;
 using MyRecipeBook.Application.UseCases.Recipe.Filter;
+using MyRecipeBook.Application.UseCases.Recipe.GetById;
 using MyRecipeBook.Communication.Requests.Recipe;
 
 namespace MyRecipeBook.API.Controllers;
@@ -24,5 +26,13 @@ public class RecipeController : MyRecipeBookControllerBase
         if (result.Recipes.Any())
             return Ok(result);
         return NoContent();
+    }
+    
+    [HttpGet("{id}")]
+    [AuthenticatedUser]
+    public async Task<IActionResult> GetById([FromServices] IRecipeGetByIdUseCase useCase,[FromRoute] [ModelBinder(typeof(MyRecipeBookIdBinder))] long id)
+    {
+        var result = await useCase.ExecuteAsync(id);
+            return Ok(result);
     }
 }

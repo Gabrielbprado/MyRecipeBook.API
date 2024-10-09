@@ -13,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(opts =>
 {
+    opts.OperationFilter<IdsFilter>();
     
     opts.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
