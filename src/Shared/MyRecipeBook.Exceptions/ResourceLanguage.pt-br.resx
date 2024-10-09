@@ -83,4 +83,7 @@
     <data name="STEP_MUST_BE_GREATER_THAN_ZERO" xml:space="preserve">
         <value>O Numero da etapa deve ser maior que 0</value>
     </data>
+    <data name="RECIPE_NOT_FOUND" xml:space="preserve">
+        <value>Receita não encontrada</value>
+    </data>
 </root>

@@ -240,6 +240,15 @@ namespace MyRecipeBook.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Receita não encontrada.
+        /// </summary>
+        public static string RECIPE_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("RECIPE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The Title cannot be empty.
         /// </summary>
         public static string RECIPE_TITLE_EMPTY {
