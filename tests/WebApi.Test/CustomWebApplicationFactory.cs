@@ -1,4 +1,5 @@
 using CommonTestUtilities.Entities;
+using CommonTestUtilities.IdEncrypt;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +13,7 @@ namespace WebApi.Test;
 public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 {
     private  MyRecipeBook.Domain.Entities.User _user { get;  set; } = default!;
-    private MyRecipeBook.Domain.Entities.Recipe _recipe { get; set; } = default!;
+    private MyRecipeBook.Domain.Entities.Recipe? _recipe { get; set; } = default!;
     private string _password { get; set; } = string.Empty;
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
@@ -71,7 +72,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 
     //Recipe
     
-    public string GetRecipeId() => _recipe.Id.ToString();
+    public string GetRecipeId() => IdEncryptBuilder.Builder().Encode(_recipe.Id);
     public string GetRecipeTitle() => _recipe.Title;
     public Difficulty GetRecipeDifficulty() => (Difficulty)_recipe.Difficulty;
     public CookingTime GetRecipeCookingTime() => (CookingTime)_recipe.CookingTime;
