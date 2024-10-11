@@ -11,6 +11,13 @@ public class RecipeRepository(MyRecipeBookContext context) : IRecipeWriteOnlyRep
 {
     private readonly MyRecipeBookContext _context = context;
     public async Task Add(Recipe recipe) => await _context.Recipes.AddAsync(recipe);
+    public async Task Delete(long id)
+    {
+        var recipe = await _context.Recipes.FindAsync(id);
+        _context.Recipes.Remove(recipe!);
+        
+    }
+
     public async Task<IList<Recipe>> Filter(User user, FilterRecipesDto filter)
     {
         var query = _context.Recipes.AsNoTracking().Where(r => r.UserId == user.Id && r.IsActive == true);
@@ -39,13 +46,13 @@ public class RecipeRepository(MyRecipeBookContext context) : IRecipeWriteOnlyRep
         return result;
     }
 
-    public Task<Recipe> GetById(User loggedUser, long recipeId)
+    public async Task<Recipe?> GetById(User loggedUser, long recipeId)
     {
-       return  _context.Recipes
+       return  await _context.Recipes
            .AsNoTracking()
            .Include(r => r.Ingredients)
            .Include(r => r.DishTypes)
            .Include(r => r.Instructions)
-           .FirstAsync(r => r.Id == recipeId && r.UserId == loggedUser.Id);
+           .FirstOrDefaultAsync(r => r.Id == recipeId && r.UserId == loggedUser.Id);
     }
 }
