@@ -5,7 +5,8 @@ namespace CommonTestUtilities.Repositories.Recipe;
 
 public class RecipeWriteOnlyRepositoryBuilder
 {
-    public static IRecipeWriteOnlyRepository Builder()
+    
+    public IRecipeWriteOnlyRepository Builder()
     {
         return new Mock<IRecipeWriteOnlyRepository>().Object;
     }

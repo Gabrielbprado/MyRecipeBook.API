@@ -25,7 +25,7 @@ public class RegisterRecipeUseCaseTest
     
     private RegisterRecipeUseCase CreateUseCase(MyRecipeBook.Domain.Entities.User user)
     {
-        var recipeWriteOnlyRepository =  RecipeWriteOnlyRepositoryBuilder.Builder();
+        var recipeWriteOnlyRepository =  new RecipeWriteOnlyRepositoryBuilder().Builder();
         var mapper = MapperBuilder.Build();
         var unityOfWork = WorkOfUnityBuilder.Build();
         var loggedUser = new LoggedUserBuilder().Build(user);
