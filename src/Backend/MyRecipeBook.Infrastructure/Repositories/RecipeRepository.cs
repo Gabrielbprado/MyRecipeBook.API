@@ -53,6 +53,19 @@ public class RecipeRepository(MyRecipeBookContext context) : IRecipeWriteOnlyRep
             .AsNoTracking()
             .FirstOrDefaultAsync(r => r.Id == recipeId && r.UserId == loggedUser.Id);
     }
+
+    public async Task<List<Recipe>> GetForDashBoard(User? user)
+    {
+        return await _context
+            .Recipes
+            .AsNoTracking()
+            .Include(recipe => recipe.Ingredients)
+            .Where(recipe => recipe.IsActive && recipe.UserId == user.Id)
+            .OrderByDescending(r => r.CreatedAt)
+            .Take(5)
+            .ToListAsync();
+    }
+
     async Task<Recipe?> IRecipeUpdateOnlyRepository.GetById(User loggedUser, long recipeId)
     {
         return await GetAllRecipe()
