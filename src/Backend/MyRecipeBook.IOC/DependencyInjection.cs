@@ -11,6 +11,7 @@ using MyRecipeBook.Application.UseCases.Recipe;
 using MyRecipeBook.Application.UseCases.Recipe.Delete;
 using MyRecipeBook.Application.UseCases.Recipe.Filter;
 using MyRecipeBook.Application.UseCases.Recipe.GetById;
+using MyRecipeBook.Application.UseCases.Recipe.Recipe;
 using MyRecipeBook.Application.UseCases.User.ChangePassword;
 using MyRecipeBook.Application.UseCases.User.Profile;
 using MyRecipeBook.Application.UseCases.User.Register;
@@ -100,6 +101,8 @@ namespace MyRecipeBook.IOC
             service.AddScoped<IRecipeReadOnlyRepository, RecipeRepository>();
             service.AddScoped<IRecipeGetByIdUseCase, RecipeGetByIdUseCase>();
             service.AddScoped<IRecipeDeleteUseCase, RecipeDeleteUseCase>();
+            service.AddScoped<IRecipeUpdateOnlyRepository, RecipeRepository>();
+            service.AddScoped<IUpdateRecipeUseCase, UpdateRecipeUseCase>();
 
         }
         private static void AddEncrypt(IServiceCollection service)

@@ -6,6 +6,7 @@ using MyRecipeBook.Application.UseCases.Recipe;
 using MyRecipeBook.Application.UseCases.Recipe.Delete;
 using MyRecipeBook.Application.UseCases.Recipe.Filter;
 using MyRecipeBook.Application.UseCases.Recipe.GetById;
+using MyRecipeBook.Application.UseCases.Recipe.Recipe;
 using MyRecipeBook.Communication.Requests.Recipe;
 using MyRecipeBook.Communication.Responses.Recipe;
 using MyRecipeBook.Exceptions.BaseException;
@@ -57,6 +58,17 @@ public class RecipeController : MyRecipeBookControllerBase
     public async Task<IActionResult> Delete([FromServices] IRecipeDeleteUseCase useCase,[FromRoute] [ModelBinder(typeof(MyRecipeBookIdBinder))] long id)
     {
         await useCase.Execute(id);
+            return NoContent();
+    }
+    
+    [HttpPut("{id}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(typeof(ErrorMessages),StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ErrorMessages),StatusCodes.Status401Unauthorized)]
+    [AuthenticatedUser]
+    public async Task<IActionResult> Update([FromServices] IUpdateRecipeUseCase useCase,[FromRoute] [ModelBinder(typeof(MyRecipeBookIdBinder))] long id,[FromBody] RequestRecipeJson request)
+    {
+        await useCase.Execute(id,request);
             return NoContent();
     }
 }

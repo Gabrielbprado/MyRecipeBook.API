@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using MyRecipeBook.Domain.Dtos;
 using MyRecipeBook.Domain.Entities;
 using MyRecipeBook.Domain.Repositories.Recipe;
@@ -7,7 +8,7 @@ using DishTypes = MyRecipeBook.Domain.Enums.DishTypes;
 
 namespace MyRecipeBook.Infrastructure.Repositories;
 
-public class RecipeRepository(MyRecipeBookContext context) : IRecipeWriteOnlyRepository, IRecipeReadOnlyRepository
+public class RecipeRepository(MyRecipeBookContext context) : IRecipeWriteOnlyRepository, IRecipeReadOnlyRepository, IRecipeUpdateOnlyRepository
 {
     private readonly MyRecipeBookContext _context = context;
     public async Task Add(Recipe recipe) => await _context.Recipes.AddAsync(recipe);
@@ -46,13 +47,28 @@ public class RecipeRepository(MyRecipeBookContext context) : IRecipeWriteOnlyRep
         return result;
     }
 
-    public async Task<Recipe?> GetById(User loggedUser, long recipeId)
+    async Task<Recipe?> IRecipeReadOnlyRepository.GetById(User loggedUser, long recipeId)
     {
-       return  await _context.Recipes
-           .AsNoTracking()
-           .Include(r => r.Ingredients)
-           .Include(r => r.DishTypes)
-           .Include(r => r.Instructions)
-           .FirstOrDefaultAsync(r => r.Id == recipeId && r.UserId == loggedUser.Id);
+        return await GetAllRecipe()
+            .AsNoTracking()
+            .FirstOrDefaultAsync(r => r.Id == recipeId && r.UserId == loggedUser.Id);
+    }
+    async Task<Recipe?> IRecipeUpdateOnlyRepository.GetById(User loggedUser, long recipeId)
+    {
+        return await GetAllRecipe()
+            .FirstOrDefaultAsync(r => r.Id == recipeId && r.UserId == loggedUser.Id);
+    }
+
+    public void Update(Recipe recipe)
+    {
+        _context.Recipes.Update(recipe);
+    }
+
+    private IIncludableQueryable<Recipe, IList<Instruction>> GetAllRecipe()
+    {
+        return _context.Recipes
+            .Include(r => r.Ingredients)
+            .Include(r => r.DishTypes)
+            .Include(r => r.Instructions);
     }
 }
