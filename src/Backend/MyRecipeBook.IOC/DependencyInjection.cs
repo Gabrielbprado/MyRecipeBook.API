@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MyRecipeBook.Application.Services.AutoMapper;
 using MyRecipeBook.Application.UseCases.Login.DoLogin;
 using MyRecipeBook.Application.UseCases.Recipe;
+using MyRecipeBook.Application.UseCases.Recipe.Delete;
 using MyRecipeBook.Application.UseCases.Recipe.Filter;
 using MyRecipeBook.Application.UseCases.Recipe.GetById;
 using MyRecipeBook.Application.UseCases.User.ChangePassword;
@@ -98,6 +99,7 @@ namespace MyRecipeBook.IOC
             service.AddScoped<IFilterRecipeUseCase, FilterRecipeUseCase>();
             service.AddScoped<IRecipeReadOnlyRepository, RecipeRepository>();
             service.AddScoped<IRecipeGetByIdUseCase, RecipeGetByIdUseCase>();
+            service.AddScoped<IRecipeDeleteUseCase, RecipeDeleteUseCase>();
 
         }
         private static void AddEncrypt(IServiceCollection service)
