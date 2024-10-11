@@ -5,5 +5,5 @@ namespace MyRecipeBook.Application.UseCases.Recipe.Recipe;
 
 public interface IUpdateRecipeUseCase
 {
-    Task<ResponseRecipeJson> Execute(long recipeId,RequestRecipeJson request);
+    Task Execute(long recipeId,RequestRecipeJson request);
 }

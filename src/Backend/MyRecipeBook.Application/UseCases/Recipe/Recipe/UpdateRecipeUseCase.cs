@@ -14,7 +14,7 @@ public class UpdateRecipeUseCase(IRecipeUpdateOnlyRepository updateOnlyRepositor
     private readonly IUnityOfWork _unityOfWork = unityOfWork;
     private readonly IMapper _mapper = mapper;
     private readonly ILoggedUser _loggedUser = loggedUser;
-    public async Task<ResponseRecipeJson> Execute(long recipeId, RequestRecipeJson request)
+    public async Task Execute(long recipeId, RequestRecipeJson request)
     {
         await Validate(request);
         var user = await _loggedUser.User();
@@ -29,7 +29,6 @@ public class UpdateRecipeUseCase(IRecipeUpdateOnlyRepository updateOnlyRepositor
         recipe.Instructions = _mapper.Map<IList<Domain.Entities.Instruction>>(instructions);
         _updateOnlyRepository.Update(recipe);
         await _unityOfWork.Commit();
-        return _mapper.Map<ResponseRecipeJson>(recipe);
     }
 
     private async Task Validate(RequestRecipeJson request)
