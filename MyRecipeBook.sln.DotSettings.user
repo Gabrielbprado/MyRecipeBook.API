@@ -1,15 +1,11 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=01a6d769_002D9fbd_002D4600_002Db109_002Dc285c34e4ef9/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="UpdateRecipeTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;Or&gt;&#xD;
-    &lt;TestAncestor&gt;&#xD;
-      &lt;TestId&gt;xUnit::06E89C81-1EC8-4AD3-A2BF-65D093FAF36A::net8.0::WebApi.Test.Recipe.Update.UpdateRecipeTest&lt;/TestId&gt;&#xD;
-    &lt;/TestAncestor&gt;&#xD;
-    &lt;And&gt;&#xD;
-      &lt;Namespace&gt;UseCase.Test.Recipe.Update&lt;/Namespace&gt;&#xD;
-      &lt;Project Location="C:\Users\guard\RiderProjects\MyRecipeBook\tests\UseCase.Test" Presentation="&amp;lt;tests&amp;gt;\&amp;lt;UseCase.Test&amp;gt;" /&gt;&#xD;
-    &lt;/And&gt;&#xD;
-  &lt;/Or&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=2612cd6e_002Dd289_002D4dea_002Db462_002Dfb169714a9c7/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Session" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;And&gt;&#xD;
+    &lt;Namespace&gt;WebApi.Test.Recipe.DashBoard&lt;/Namespace&gt;&#xD;
+    &lt;Project Location="C:\Users\guard\RiderProjects\MyRecipeBook\tests\WebApi.Test" Presentation="&amp;lt;tests&amp;gt;\&amp;lt;WebApi.Test&amp;gt;" /&gt;&#xD;
+  &lt;/And&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	
 	
 	
 	
