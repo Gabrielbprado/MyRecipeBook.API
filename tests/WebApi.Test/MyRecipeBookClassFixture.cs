@@ -8,9 +8,10 @@ public class MyRecipeBookClassFixture(CustomWebApplicationFactory factory) : ICl
 {
     private readonly HttpClient _httpClient = factory.CreateClient();
 
-    protected async Task<HttpResponseMessage> DoPost(string requestUrl, object request, string culture = "en")
+    protected async Task<HttpResponseMessage> DoPost(string requestUrl, object request, string culture = "en",string token = "")
     {
         ChangeCulture(culture);
+        Authorization(token);
         return await _httpClient.PostAsJsonAsync(requestUrl, request);
     }
 
@@ -20,7 +21,12 @@ public class MyRecipeBookClassFixture(CustomWebApplicationFactory factory) : ICl
         Authorization(token);
         return await _httpClient.GetAsync(requestUrl);
     }
-
+    protected async Task<HttpResponseMessage> DoDelete(string requestUrl,string token = "",string culture = "en")
+    {
+        ChangeCulture(culture);
+        Authorization(token);
+        return await _httpClient.DeleteAsync(requestUrl);
+    }
     protected async Task<HttpResponseMessage> DoPut(string requestUrl, object request, string token = "", string culture = "en")
     {
         ChangeCulture(culture);

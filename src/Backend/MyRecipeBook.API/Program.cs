@@ -3,20 +3,17 @@ using MyRecipeBook.API.Filters;
 using MyRecipeBook.API.Middleware;
 using MyRecipeBook.API.Token;
 using MyRecipeBook.Domain.Security.Tokens;
-using MyRecipeBook.Domain.Services.LoggedUser;
 using MyRecipeBook.Infrastructure.Data;
-using MyRecipeBook.Infrastructure.Services.LoggedUser;
 using MyRecipeBook.IOC;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
 
 builder.Services.AddSwaggerGen(opts =>
 {
+    opts.OperationFilter<IdsFilter>();
     
     opts.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
@@ -72,7 +69,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 CreateDatabase();
-// Add help for Controllers
+
 app.Run();
 
 void CreateDatabase()

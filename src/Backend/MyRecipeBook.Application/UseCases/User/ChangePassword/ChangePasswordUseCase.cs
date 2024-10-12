@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.Forms;
 using MyRecipeBook.Communication.Requests.ChangePassword;
 using MyRecipeBook.Communication.Responses;
 using MyRecipeBook.Domain.Repositories;
+using MyRecipeBook.Domain.Repositories.User;
 using MyRecipeBook.Domain.Security.Cryptography;
 using MyRecipeBook.Domain.Services.LoggedUser;
 using MyRecipeBook.Exceptions;

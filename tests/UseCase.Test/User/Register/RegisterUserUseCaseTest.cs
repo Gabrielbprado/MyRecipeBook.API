@@ -2,6 +2,8 @@ using CommonTestUtilities;
 using CommonTestUtilities.Encrypt;
 using CommonTestUtilities.Mapper;
 using CommonTestUtilities.Repositories;
+using CommonTestUtilities.Repositories.User;
+using CommonTestUtilities.Requests.User;
 using CommonTestUtilities.Tokens;
 using FluentAssertions;
 using MyRecipeBook.Application.UseCases.User.Register;

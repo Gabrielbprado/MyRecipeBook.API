@@ -1,5 +1,6 @@
 using System.Net;
 using CommonTestUtilities.Requests;
+using CommonTestUtilities.Requests.User;
 using CommonTestUtilities.Tokens;
 using FluentAssertions;
 using MyRecipeBook.Communication.Requests;

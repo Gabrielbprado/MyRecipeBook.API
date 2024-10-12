@@ -12,8 +12,7 @@ public class ExceptionFilter : IExceptionFilter
     {
         if (context.Exception is MyRecipeBookException)
             HandleMyRecipeBookException(context);
-        else
-            UnknowError(context);
+       
     }
 
 
@@ -32,7 +31,11 @@ public class ExceptionFilter : IExceptionFilter
             context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
             
         }
-        
+        else if (context.Exception is NotFoundException)
+        {
+            context.Result = new NotFoundObjectResult(new ResponseErrorMessage(ResourceLanguage.RECIPE_NOT_FOUND));
+            context.HttpContext.Response.StatusCode = StatusCodes.Status404NotFound;
+        }
     }
     private static void UnknowError(ExceptionContext context)
     {

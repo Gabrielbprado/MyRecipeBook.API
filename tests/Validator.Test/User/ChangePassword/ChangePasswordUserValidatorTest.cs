@@ -1,4 +1,5 @@
 using CommonTestUtilities.Requests;
+using CommonTestUtilities.Requests.User;
 using FluentAssertions;
 using FluentValidation;
 using MyRecipeBook.Application.UseCases.User.ChangePassword;

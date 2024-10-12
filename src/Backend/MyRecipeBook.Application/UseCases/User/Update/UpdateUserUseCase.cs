@@ -1,6 +1,7 @@
 using FluentValidation.Results;
 using MyRecipeBook.Communication.Requests.User;
 using MyRecipeBook.Domain.Repositories;
+using MyRecipeBook.Domain.Repositories.User;
 using MyRecipeBook.Domain.Security.Tokens;
 using MyRecipeBook.Domain.Services.LoggedUser;
 using MyRecipeBook.Exceptions;

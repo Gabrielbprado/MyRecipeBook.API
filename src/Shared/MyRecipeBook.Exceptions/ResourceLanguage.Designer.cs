@@ -60,6 +60,33 @@ namespace MyRecipeBook.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Recipe must contain at least 1 ingredient.
+        /// </summary>
+        public static string AT_LEAST_ONE_INGREDIENT {
+            get {
+                return ResourceManager.GetString("AT_LEAST_ONE_INGREDIENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The recipe must contain at least one instruction.
+        /// </summary>
+        public static string AT_LEAST_ONE_INSCTRUCTION {
+            get {
+                return ResourceManager.GetString("AT_LEAST_ONE_INSCTRUCTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid dish type.
+        /// </summary>
+        public static string DISH_TYPE_INVALID {
+            get {
+                return ResourceManager.GetString("DISH_TYPE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to the email already exist.
         /// </summary>
         public static string EMAIL_ALREADY_EXIST {
@@ -92,6 +119,60 @@ namespace MyRecipeBook.Exceptions {
         public static string INCORRECT_PASSWORD {
             get {
                 return ResourceManager.GetString("INCORRECT_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ingredient name cannot be empty.
+        /// </summary>
+        public static string INGREDIENT_NAME_EMPTY {
+            get {
+                return ResourceManager.GetString("INGREDIENT_NAME_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ingredient quantity must not be empty.
+        /// </summary>
+        public static string INGREDIENT_QUANTITY_EMPTY {
+            get {
+                return ResourceManager.GetString("INGREDIENT_QUANTITY_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Os Passos da intrução não podem se repetir.
+        /// </summary>
+        public static string INSTRUCTION_STEP_DUPLICATE {
+            get {
+                return ResourceManager.GetString("INSTRUCTION_STEP_DUPLICATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The instruction step cannot be empty.
+        /// </summary>
+        public static string INSTRUCTION_STEP_EMPTY {
+            get {
+                return ResourceManager.GetString("INSTRUCTION_STEP_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The instruction text cannot be empty.
+        /// </summary>
+        public static string INSTRUCTION_TEXT_EMPTY {
+            get {
+                return ResourceManager.GetString("INSTRUCTION_TEXT_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The text must have a maximum of 2000 characters.
+        /// </summary>
+        public static string INSTRUCTION_TEXT_MAX_LENGTH {
+            get {
+                return ResourceManager.GetString("INSTRUCTION_TEXT_MAX_LENGTH", resourceCulture);
             }
         }
         
@@ -137,6 +218,51 @@ namespace MyRecipeBook.Exceptions {
         public static string PASSWORD_MINIMUM_LENGTH {
             get {
                 return ResourceManager.GetString("PASSWORD_MINIMUM_LENGTH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid cooking time.
+        /// </summary>
+        public static string RECIPE_COOKING_TIME_INVALID {
+            get {
+                return ResourceManager.GetString("RECIPE_COOKING_TIME_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid difficulty.
+        /// </summary>
+        public static string RECIPE_DIFFICULTY_INVALID {
+            get {
+                return ResourceManager.GetString("RECIPE_DIFFICULTY_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Receita não encontrada.
+        /// </summary>
+        public static string RECIPE_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("RECIPE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Title cannot be empty.
+        /// </summary>
+        public static string RECIPE_TITLE_EMPTY {
+            get {
+                return ResourceManager.GetString("RECIPE_TITLE_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Step number must be greater than 0.
+        /// </summary>
+        public static string STEP_MUST_BE_GREATER_THAN_ZERO {
+            get {
+                return ResourceManager.GetString("STEP_MUST_BE_GREATER_THAN_ZERO", resourceCulture);
             }
         }
         

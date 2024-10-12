@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Net;
 using System.Text.Json;
 using CommonTestUtilities.Requests;
+using CommonTestUtilities.Requests.User;
 using FluentAssertions;
 using MyRecipeBook.Communication.Requests;
 using MyRecipeBook.Exceptions;

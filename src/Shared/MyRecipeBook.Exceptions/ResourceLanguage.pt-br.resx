@@ -44,4 +44,46 @@
     <data name="USER_WITHOUT_PERMISSION" xml:space="preserve">
         <value>Usuario não Autorizado</value>
     </data>
+    <data name="RECIPE_TITLE_EMPTY" xml:space="preserve">
+        <value>O título não pode estar vazio</value>
+    </data>
+    <data name="RECIPE_COOKING_TIME_INVALID" xml:space="preserve">
+        <value>Tempo de cozimento ínvalido</value>
+    </data>
+    <data name="RECIPE_DIFFICULTY_INVALID" xml:space="preserve">
+        <value>Dificuldade ínvalida</value>
+    </data>
+    <data name="AT_LEAST_ONE_INGREDIENT" xml:space="preserve">
+        <value>A Receita deve conter pelo menos 1 ingrediente</value>
+    </data>
+    <data name="AT_LEAST_ONE_INSCTRUCTION" xml:space="preserve">
+        <value>A receita deve conter pelo menos uma instrução</value>
+    </data>
+    <data name="DISH_TYPE_INVALID" xml:space="preserve">
+        <value>Tipo de Prato ínvalido</value>
+    </data>
+    <data name="INSTRUCTION_STEP_EMPTY" xml:space="preserve">
+        <value>O Passo da intrução não pode ser vazio</value>
+    </data>
+    <data name="INSTRUCTION_TEXT_EMPTY" xml:space="preserve">
+        <value>O Texto da intrução não pode ser vazio</value>
+    </data>
+    <data name="INGREDIENT_NAME_EMPTY" xml:space="preserve">
+        <value>O Nome do ingrediente não pode ser vazio</value>
+    </data>
+    <data name="INGREDIENT_QUANTITY_EMPTY" xml:space="preserve">
+        <value>Quantidade do ingrediente não pode ser vazia</value>
+    </data>
+    <data name="INSTRUCTION_STEP_DUPLICATE" xml:space="preserve">
+        <value>Os Passos da instrução não podem se repetir</value>
+    </data>
+    <data name="INSTRUCTION_TEXT_MAX_LENGTH" xml:space="preserve">
+        <value>O Texto deve ter no maximo 2000 Caracteres</value>
+    </data>
+    <data name="STEP_MUST_BE_GREATER_THAN_ZERO" xml:space="preserve">
+        <value>O Numero da etapa deve ser maior que 0</value>
+    </data>
+    <data name="RECIPE_NOT_FOUND" xml:space="preserve">
+        <value>Receita não encontrada</value>
+    </data>
 </root>
