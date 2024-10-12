@@ -16,6 +16,9 @@ public class DashBoardController : MyRecipeBookControllerBase
     public async Task<IActionResult> GetToDashBoard([FromServices] IGetDashBoardUseCase useCase)
     {
         var result = await useCase.Execute();
-        return Ok(result);
+        if (result.Recipes.Any())
+         return Ok(result);
+
+        return NotFound();
     }
 }
