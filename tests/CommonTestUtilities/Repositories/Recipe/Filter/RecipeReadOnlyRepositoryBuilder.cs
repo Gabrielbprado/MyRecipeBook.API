@@ -22,6 +22,14 @@ public class RecipeReadOnlyRepositoryBuilder
 
         return this;
     }
+
+    public RecipeReadOnlyRepositoryBuilder GetForDashBoard(MyRecipeBook.Domain.Entities.User? user,List<MyRecipeBook.Domain.Entities.Recipe> recipe)
+    {
+        if (recipe is not null) 
+            _mock.Setup(repository => repository.GetForDashBoard(user)).ReturnsAsync(recipe);
+
+        return this;
+    }
     
     public IRecipeReadOnlyRepository Builder()
     {

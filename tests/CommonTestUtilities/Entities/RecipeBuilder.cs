@@ -9,9 +9,9 @@ namespace CommonTestUtilities.Entities;
 
 public class RecipeBuilder
 {
-    private IList<Recipe?> recipes = new List<Recipe?>();
+    private List<Recipe?> recipes = new List<Recipe?>();
     
-    public IList<Recipe?> Collection(User user, int count = 2)
+    public List<Recipe?> Collection(User user, int count = 2)
     {
         if (count <= 0)
             count = 1;
