@@ -25,11 +25,7 @@ public class RecipeValidator : AbstractValidator<RequestRecipeJson>
                 .MaximumLength(2000).WithMessage(ResourceLanguage.INSTRUCTION_TEXT_MAX_LENGTH);
         });
         
-        RuleForEach(r => r.Ingredients).ChildRules(i =>
-        {
-            i.RuleFor(ingredient => ingredient.Name).NotEmpty().WithMessage(ResourceLanguage.INGREDIENT_NAME_EMPTY);
-            i.RuleFor(ingredient => ingredient.Quantity).NotEmpty().WithMessage(ResourceLanguage.INGREDIENT_QUANTITY_EMPTY);
-        });
+        RuleForEach(recipe => recipe.Ingredients).NotEmpty().WithMessage(ResourceLanguage.INGREDIENT_NAME_EMPTY);
         
         RuleFor(r => r.Instructions).Must(i => i.Count == i.Select(x => x.Step).Distinct().Count())
             .WithMessage(ResourceLanguage.INSTRUCTION_STEP_DUPLICATE);

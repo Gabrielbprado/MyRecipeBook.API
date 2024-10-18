@@ -104,17 +104,12 @@ public class RecipeValidatorTest
     public async Task Error_Empty_Value_Ingredients(string value)
     {
         var request = RequestRecipeJsonBuilder.Build();
-        var ingredient = new RequestIngredientJson()
-        {
-            Name = value,
-            Quantity = "value"
-        };
         var validator = new RecipeValidator();
-        request.Ingredients.Add(ingredient);
+        request.Ingredients.Clear();
         var result = await validator.ValidateAsync(request);
 
         result.IsValid.Should().BeFalse();
-        result.Errors.Should().Contain(e => e.ErrorMessage == ResourceLanguage.INGREDIENT_NAME_EMPTY);
+        result.Errors.Should().Contain(e => e.ErrorMessage == ResourceLanguage.AT_LEAST_ONE_INGREDIENT);
     }
     
     [Fact]

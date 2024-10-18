@@ -75,7 +75,7 @@
         <value>La quantité d'ingrédients ne doit pas être vide</value>
     </data>
     <data name="INSTRUCTION_STEP_DUPLICATE" xml:space="preserve">
-        <value>Os Passos da intrução não podem se repetir</value>
+        <value>Les étapes de l'instruction ne peuvent pas être répétées</value>
     </data>
     <data name="INSTRUCTION_TEXT_MAX_LENGTH" xml:space="preserve">
         <value>Le texte ne doit pas dépasser 2000 caractères</value>
@@ -85,5 +85,11 @@
     </data>
     <data name="RECIPE_NOT_FOUND" xml:space="preserve">
         <value>Recette non trouvée</value>
+    </data>
+    <data name="INGREDIENT_NUMBER_INVALID" xml:space="preserve">
+        <value>Nombre d'ingrédients non valables</value>
+    </data>
+    <data name="DUPLICATED_INGREDIENT" xml:space="preserve">
+        <value>Ingredientes duplicados na lista</value>
     </data>
 </root>

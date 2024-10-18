@@ -91,6 +91,12 @@
         <value>The Step number must be greater than 0</value>
     </data>
     <data name="RECIPE_NOT_FOUND" xml:space="preserve">
-        <value>Receita não encontrada</value>
+        <value>Recipe not found</value>
+    </data>
+    <data name="INGREDIENT_NUMBER_INVALID" xml:space="preserve">
+        <value>Number of invalid ingredients</value>
+    </data>
+    <data name="DUPLICATED_INGREDIENT" xml:space="preserve">
+        <value>Duplicated ingredients in list</value>
     </data>
 </root>

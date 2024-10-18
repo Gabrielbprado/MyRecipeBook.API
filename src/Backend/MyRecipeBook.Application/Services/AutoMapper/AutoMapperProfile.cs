@@ -30,9 +30,10 @@ namespace MyRecipeBook.Application.Services.AutoMapper
                 .ForMember(r => r.Instructions, opts => opts.Ignore())
                 .ForMember(dest => dest.DishTypes, opt => opt.MapFrom(source => source.DishTypes.Distinct()));
 
-            CreateMap<RequestIngredientJson, Ingredient>();
             CreateMap<RequestInstructionJson, Instruction>();
             CreateMap<RequestFilterRecipeJson, FilterRecipesDto>();
+            CreateMap<string, Domain.Entities.Ingredient>()
+                .ForMember(dest => dest.Item, opt => opt.MapFrom(source => source));
 
         }
 
@@ -60,6 +61,8 @@ namespace MyRecipeBook.Application.Services.AutoMapper
             
             CreateMap<Instruction,ResponseInstructionsJson>()
                 .ForMember(des => des.Id, opt => opt.MapFrom(source => _idEncoder.Encode(source.Id)));
+
+            CreateMap<GenerateRecipeDto, ResponseGenerateRecipeJson>();
         }
     }
 }

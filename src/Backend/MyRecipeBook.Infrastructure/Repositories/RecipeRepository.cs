@@ -25,7 +25,7 @@ public class RecipeRepository(MyRecipeBookContext context) : IRecipeWriteOnlyRep
         
         if (String.IsNullOrEmpty(filter.RecipeName_Ingredient) is false)
         {
-            query = query.Where(r => r.Title.Contains(filter.RecipeName_Ingredient) || r.Ingredients.Any(r => r.Name.Contains(filter.RecipeName_Ingredient)));
+            query = query.Where(r => r.Title.Contains(filter.RecipeName_Ingredient) || r.Ingredients.Any(r => r.Item.Contains(filter.RecipeName_Ingredient)));
 
         }
         if (filter.CookingTime.Any())

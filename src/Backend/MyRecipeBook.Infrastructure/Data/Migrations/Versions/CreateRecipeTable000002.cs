@@ -16,8 +16,7 @@ public class CreateRecipeTable000002 : BaseMigration
             .WithColumn("UserId").AsInt64().NotNullable().ForeignKey("FK_Recipes_Users_Id", "Users", "Id");
 
         CreateTable("Ingredients")
-            .WithColumn("Name").AsString().NotNullable()
-            .WithColumn("Quantity").AsString().NotNullable()
+            .WithColumn("Item").AsString().NotNullable()
             .WithColumn("RecipeId").AsInt64().NotNullable().ForeignKey("FK_Ingredients_Recipes_Id", "Recipes", "Id")
             .OnDelete(Rule.Cascade);
         

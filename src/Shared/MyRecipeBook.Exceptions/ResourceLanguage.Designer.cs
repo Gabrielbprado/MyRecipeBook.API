@@ -87,6 +87,15 @@ namespace MyRecipeBook.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Duplicated ingredients in list.
+        /// </summary>
+        public static string DUPLICATED_INGREDIENT {
+            get {
+                return ResourceManager.GetString("DUPLICATED_INGREDIENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to the email already exist.
         /// </summary>
         public static string EMAIL_ALREADY_EXIST {
@@ -128,6 +137,15 @@ namespace MyRecipeBook.Exceptions {
         public static string INGREDIENT_NAME_EMPTY {
             get {
                 return ResourceManager.GetString("INGREDIENT_NAME_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of invalid ingredients.
+        /// </summary>
+        public static string INGREDIENT_NUMBER_INVALID {
+            get {
+                return ResourceManager.GetString("INGREDIENT_NUMBER_INVALID", resourceCulture);
             }
         }
         
@@ -240,7 +258,7 @@ namespace MyRecipeBook.Exceptions {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Receita não encontrada.
+        ///   Looks up a localized string similar to Recipe not found.
         /// </summary>
         public static string RECIPE_NOT_FOUND {
             get {

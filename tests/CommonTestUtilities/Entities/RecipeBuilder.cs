@@ -36,7 +36,7 @@ public class RecipeBuilder
             .RuleFor(r => r.Ingredients, (f) => f.Make(1, () => new Ingredient
             {
                 Id = 1,
-                Quantity = f.Commerce.ProductName()
+                Item = f.Commerce.ProductName()
             }))
             .RuleFor(r => r.Instructions, (f) => f.Make(1, () => new Instruction
             {
