@@ -1,6 +1,6 @@
 using MyRecipeBook.Domain.Dtos;
 
-namespace MyRecipeBook.Domain.Repositories.Recipe;
+namespace MyRecipeBook.Domain.Services.OpenAi;
 
 public interface IGenerateRecipeAi
 {
