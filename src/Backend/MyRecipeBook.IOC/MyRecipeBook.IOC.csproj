@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <PackageReference Include="AutoMapper" Version="13.0.1" />
+      <PackageReference Include="Azure.AI.OpenAI" Version="1.0.0-beta.5" />
       <PackageReference Include="FluentMigrator" Version="5.2.0" />
       <PackageReference Include="FluentMigrator.Runner" Version="5.2.0" />
       <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />

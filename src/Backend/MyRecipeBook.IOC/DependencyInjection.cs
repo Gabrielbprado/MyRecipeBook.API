@@ -1,5 +1,6 @@
 using System.Reflection;
 using AutoMapper;
+using Azure;
 using FluentMigrator.Runner;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using MyRecipeBook.Application.UseCases.Recipe;
 using MyRecipeBook.Application.UseCases.Recipe.DashBoard;
 using MyRecipeBook.Application.UseCases.Recipe.Delete;
 using MyRecipeBook.Application.UseCases.Recipe.Filter;
+using MyRecipeBook.Application.UseCases.Recipe.Generate;
 using MyRecipeBook.Application.UseCases.Recipe.GetById;
 using MyRecipeBook.Application.UseCases.Recipe.Recipe;
 using MyRecipeBook.Application.UseCases.User.ChangePassword;
@@ -23,13 +25,17 @@ using MyRecipeBook.Domain.Repositories.User;
 using MyRecipeBook.Domain.Security.Cryptography;
 using MyRecipeBook.Domain.Security.Tokens;
 using MyRecipeBook.Domain.Services.LoggedUser;
+using MyRecipeBook.Domain.Services.OpenAi;
 using MyRecipeBook.Infrastructure.Data;
 using MyRecipeBook.Infrastructure.Repositories;
 using MyRecipeBook.Infrastructure.Security.Cryptography;
 using MyRecipeBook.Infrastructure.Security.Token.Access.Generate;
 using MyRecipeBook.Infrastructure.Security.Token.Access.Validate;
 using MyRecipeBook.Infrastructure.Services.LoggedUser;
+using MyRecipeBook.Infrastructure.Services.OpenAi;
 using Sqids;
+using Azure.AI.OpenAI;
+using Azure;
 
 namespace MyRecipeBook.IOC
 {
@@ -43,6 +49,7 @@ namespace MyRecipeBook.IOC
             AddEncrypt(service);
             AddInfrastructure(service, configuration);
             AddTokens(service, configuration);
+            AddOpenAi(service,configuration);
         }
 
         public static void RunMigrations(this IApplicationBuilder services)
@@ -57,10 +64,7 @@ namespace MyRecipeBook.IOC
         private static void AddDataContext(IServiceCollection service, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("DefaultConnection");
-            service.AddDbContext<MyRecipeBookContext>(opts =>
-            {
-                opts.UseSqlite(connectionString);
-            });
+            service.AddDbContext<MyRecipeBookContext>(opts => { opts.UseSqlite(connectionString); });
         }
 
         private static void AddInfrastructure(IServiceCollection service, IConfiguration configuration)
@@ -70,6 +74,7 @@ namespace MyRecipeBook.IOC
             {
                 return;
             }
+
             AddDataContext(service, configuration);
             AddFluentMigration(service, configuration);
         }
@@ -92,11 +97,11 @@ namespace MyRecipeBook.IOC
             service.AddScoped<IUnityOfWork, UnityOfWork>();
             service.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
             service.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
-            service.AddScoped<IGetProfileUserUseCase,GetProfileUserUseCase>();
+            service.AddScoped<IGetProfileUserUseCase, GetProfileUserUseCase>();
             service.AddScoped<IUserUpdateOnlyRepository, UserRepository>();
             service.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
             service.AddScoped<IChangePasswordUseCase, ChangePasswordUseCase>();
-            service.AddScoped<IRecipeWriteOnlyRepository,RecipeRepository>();
+            service.AddScoped<IRecipeWriteOnlyRepository, RecipeRepository>();
             service.AddScoped<IRegisterRecipeUseCase, RegisterRecipeUseCase>();
             service.AddScoped<IFilterRecipeUseCase, FilterRecipeUseCase>();
             service.AddScoped<IRecipeReadOnlyRepository, RecipeRepository>();
@@ -105,16 +110,28 @@ namespace MyRecipeBook.IOC
             service.AddScoped<IRecipeUpdateOnlyRepository, RecipeRepository>();
             service.AddScoped<IUpdateRecipeUseCase, UpdateRecipeUseCase>();
             service.AddScoped<IGetDashBoardUseCase, GetDashBoardUseCase>();
+            service.AddScoped<IGenerateRecipeUseCase, GenerateRecipeUseCase>();
 
         }
-        private static void AddEncrypt(IServiceCollection service)
+        private static void AddOpenAi(IServiceCollection service, IConfiguration configuration)
+        {
+            service.AddScoped<IGenerateRecipeAi, ChatGptService>();
+            var key = configuration.GetValue<string>("Settings:OpenAi:ApiKey");
+            var endpoint = configuration.GetValue<string>("Settings:OpenAi:Endpoint");
+          var client = new OpenAIClient(
+                new Uri(endpoint),
+                new AzureKeyCredential(key));
+
+            service.AddSingleton(client);
+        }
+    private static void AddEncrypt(IServiceCollection service)
         {
             service.AddScoped<IPasswordCrypt,PasswordCrypt>();
         }
 
         private static void AddAutoMapper(IServiceCollection service)
         {
-            service.AddScoped(option => new AutoMapper.MapperConfiguration(autoMapperOptions =>
+            service.AddScoped(option => new MapperConfiguration(autoMapperOptions =>
             {
                 var sqids = option.GetService<SqidsEncoder<long>>()!;
 
