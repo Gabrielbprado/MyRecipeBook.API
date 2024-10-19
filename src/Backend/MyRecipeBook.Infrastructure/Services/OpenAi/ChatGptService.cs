@@ -37,7 +37,7 @@ public class ChatGptService(OpenAIClient  openAiApi) : IGenerateRecipeAi
             .ToList();
         
         var step = 1;
-        var response22=  new GenerateRecipeDto()
+        return  new GenerateRecipeDto()
         {
             Title = responseList[0],
             CookingTime = (CookingTime)Enum.Parse(typeof(CookingTime), responseList[1]),
@@ -48,6 +48,5 @@ public class ChatGptService(OpenAIClient  openAiApi) : IGenerateRecipeAi
                 Step = step++
             }).ToList()
         };
-        return response22;
     }
 }

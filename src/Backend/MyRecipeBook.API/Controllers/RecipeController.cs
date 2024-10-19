@@ -5,10 +5,13 @@ using MyRecipeBook.API.Binders;
 using MyRecipeBook.Application.UseCases.Recipe;
 using MyRecipeBook.Application.UseCases.Recipe.Delete;
 using MyRecipeBook.Application.UseCases.Recipe.Filter;
+using MyRecipeBook.Application.UseCases.Recipe.Generate;
 using MyRecipeBook.Application.UseCases.Recipe.GetById;
 using MyRecipeBook.Application.UseCases.Recipe.Recipe;
 using MyRecipeBook.Communication.Requests.Recipe;
 using MyRecipeBook.Communication.Responses.Recipe;
+using MyRecipeBook.Domain.Dtos;
+using MyRecipeBook.Domain.Services.OpenAi;
 using MyRecipeBook.Exceptions.BaseException;
 
 namespace MyRecipeBook.API.Controllers;
@@ -70,5 +73,16 @@ public class RecipeController : MyRecipeBookControllerBase
     {
         await useCase.Execute(id,request);
             return NoContent();
+    }
+    
+    [HttpPost("generate")]
+    [ProducesResponseType(typeof(GenerateRecipeDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ErrorMessages), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(ErrorMessages), StatusCodes.Status401Unauthorized)]
+    [AuthenticatedUser]
+    public async Task<IActionResult> Generate([FromServices] IGenerateRecipeUseCase useCase, [FromBody] RequestGenerateRecipeJson ingredients)
+    {
+        var result = await useCase.Execute(ingredients);
+        return Ok(result);
     }
 }

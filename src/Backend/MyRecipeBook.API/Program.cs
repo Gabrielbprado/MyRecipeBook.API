@@ -41,6 +41,10 @@ builder.Services.AddSwaggerGen(opts =>
             new List<string>()
         }
     });
+    opts.CustomSchemaIds(type =>
+    {
+        return $"{type.Namespace}.{type.Name}";
+    });
 
 });
 builder.Services.AddControllers();
