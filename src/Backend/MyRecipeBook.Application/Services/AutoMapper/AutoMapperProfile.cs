@@ -62,7 +62,12 @@ namespace MyRecipeBook.Application.Services.AutoMapper
             CreateMap<Instruction,ResponseInstructionsJson>()
                 .ForMember(des => des.Id, opt => opt.MapFrom(source => _idEncoder.Encode(source.Id)));
 
-            CreateMap<GenerateRecipeDto, ResponseGenerateRecipeJson>();
+            CreateMap<GenerateRecipeDto, ResponseGenerateRecipeJson>()
+                .ForMember(r => r.Instructions, opts => opts.MapFrom(source => source.Instructions.Select(c => new ResponseInstructionsJson
+                {
+                    Step = c.Step,
+                    Text = c.Text,
+                }).ToList()));
         }
     }
 }

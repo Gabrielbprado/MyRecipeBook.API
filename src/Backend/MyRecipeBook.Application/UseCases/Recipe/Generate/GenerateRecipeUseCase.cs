@@ -3,6 +3,7 @@ using MyRecipeBook.Communication.Requests.Recipe;
 using MyRecipeBook.Communication.Responses.Recipe;
 using MyRecipeBook.Domain.Dtos;
 using MyRecipeBook.Domain.Repositories.Recipe;
+using MyRecipeBook.Domain.Services.OpenAi;
 using MyRecipeBook.Exceptions.BaseException;
 
 namespace MyRecipeBook.Application.UseCases.Recipe.Generate;
